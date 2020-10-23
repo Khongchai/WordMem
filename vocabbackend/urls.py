@@ -1,7 +1,7 @@
 from django.urls import path
-from . import views
+from .views import VocabViewSet
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    path('', views.apiOverview, name="api-overview"),
-    path('vocab-list', views.vocab_list, name="vocab-list"),
-]
+router = DefaultRouter()
+router.register(r'vocab', VocabViewSet, 'vocab')
+urlpatterns = router.urls

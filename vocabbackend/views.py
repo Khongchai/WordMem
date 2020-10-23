@@ -2,32 +2,25 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import *
+from .models import Vocab
+from .serializers import *
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from rest_framework import generics
-from .serializers import *
-from django.contrib.auth import authenticate, login, logout
+from rest_framework import viewsets, permissions
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 
-@api_view(["GET"])
-def apiOverview(request):
-    #this view returns list of all available APIs.
-    api_urls = {
-        "List": '/vocab-list/',
-        "Edit": '/vocab-edit/<',
-        "Delete": '/vocab-delete/<id>',
-    }
-    return Response(api_urls)
 
 
-@api_view(["GET"])
-def vocab_list(request):
-    cur_user = request.user
-    vocab_list = Vocab.objects.filter(owner=cur_user)
-    serializer = VocabSerializer(vocab_list, many=True)
+class VocabViewSet(viewsets.ModelViewSet):
+    serializer_class = VocabSerializer
+    #change to IsAuthenticated later
+    permission_classes = [AllowAny,]
+    queryset = Vocab.objects.all().order_by("-id")
 
-    return Response(serializer.data)
+    #Currently no CRUD overrides.
+
 
 
 
