@@ -1,3 +1,4 @@
-1. Do all the register, login and other user-related API.
-
-2. After that's done, try fetch info and display in a page.
+1. Enable django-CORS
+2. Then connect front to backend.
+3. Implement login functionality.
+4. Implement a basic landing page for frontend.

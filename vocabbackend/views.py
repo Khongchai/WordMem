@@ -16,7 +16,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 class VocabViewSet(viewsets.ModelViewSet):
     serializer_class = VocabSerializer
     #change to IsAuthenticated later
-    permission_classes = [AllowAny,]
+    permission_classes = [IsAuthenticated,]
     queryset = Vocab.objects.all().order_by("-id")
 
     #Currently no CRUD overrides.

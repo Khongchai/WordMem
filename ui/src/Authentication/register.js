@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import '../App.css';
+import { register } from '../fetch/fetch';
 
 
 function Login(props)
@@ -18,16 +18,25 @@ function Login(props)
 
 function LogInForm(props)
 {
+  function registerUser(e)
+  { 
+    e.preventDefault();
+    //TODO => log the user in with the data and then redirect to homepage.
+    register().then(dataForNewUser => console.log(dataForNewUser));
+  }
   return(
-    <div style={{padding: "10px"}}>
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required />
+    <form style={{padding: "10px"}} onSubmit={(e) => {registerUser(e)}}>
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required />
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required />
+      <label for="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" required />
+
+      <label for="password"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" required />
       
-      <div style={{width:"100%", textAlign: "center"}}><button type="submit">SIGN IN</button></div>
-    </div>
+      <div style={{width:"100%", textAlign: "center"}}><button type="submit">REGISTER</button></div>
+    </form>
   )
 }
 
