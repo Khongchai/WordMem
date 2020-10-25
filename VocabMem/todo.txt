@@ -1,4 +1,4 @@
-1. Enable django-CORS
-2. Then connect front to backend.
-3. Implement login functionality.
 4. Implement a basic landing page for frontend.
+//implement a logout button
+- //for now show all the vocab
+ //later only show vocab for those who are logged in.

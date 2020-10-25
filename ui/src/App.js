@@ -1,19 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Login from './Authentication/register';
+import Register from './Authentication/register';
+import Login from './Authentication/login';
+import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
+import Dashboard from './dashboard/dashboard';
+import {authState} from './Authentication/AuthState';
 
 class App extends React.Component
 {
   //on start check if user is logged in using Tokenauthentication.
-  render(){
+  render()
+  {
+    //Render register page if user is not authenticated.
     return (
-      //Render this login page if user is not authenticated.
-      <div>
-        <Login/>
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path = "/">
+            {() => isUserAlreadyAuthenticated(<Register/>)}
+            </Route>
+          <Route exact path = "/login">
+            {() => isUserAlreadyAuthenticated(<Login/>)}
+          </Route>
+          <Route exact path = "/dashboard">
+            {authState.isAuthenticated? <Dashboard/>:<Register/>}
+          </Route>
+        </Switch>
+      </Router>
+
     )
   }
 }
+
+function isUserAlreadyAuthenticated(Component)
+{
+  return authState.isAuthenticated? <Redirect to="/dashboard"/>:Component
+}
+
 
 export default App;

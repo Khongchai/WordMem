@@ -15,14 +15,23 @@ class RegisterAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
 
-        user_serializer = UserSerializer(user)
 
         return Response({
-            "user": user_serializer.data,
+            "user": UserSerializer(user).data,
             "token": AuthToken.objects.create(user)[1]
         })
 
+class LoginAPI(generics.GenericAPIView):
+    serializer_class = LoginSerializer
 
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        deserializedUserData = serializer.validated_data
+        return Response({
+            "user": UserSerializer(deserializedUserData).data,
+            "token": AuthToken.objects.create(deserializedUserData)[1]
+        })
 
 
 #can do serializer.save(owner = request.user)
