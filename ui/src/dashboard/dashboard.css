@@ -1,0 +1,31 @@
+.dashboardLeftWindow
+{
+    order: 1;
+    height: 100%;
+    flex: 1;
+    min-width: 250px;
+    background-color: black;
+
+    display: flex;
+    /* watch fireship video 
+    https://www.youtube.com/watch?v=biOMz4puGt8&t=573s
+    follow religiously
+    also, logout button at the end.
+    */
+
+}
+.dashboardRightWindow
+{
+    order: 2;
+    height: 100%;
+    flex: 4.5;
+    background-color: grey;
+}
+
+
+dashboard
+{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}

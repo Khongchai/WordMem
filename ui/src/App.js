@@ -4,7 +4,8 @@ import Register from './Authentication/register';
 import Login from './Authentication/login';
 import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import Dashboard from './dashboard/dashboard';
-import {authState} from './Authentication/AuthState';
+import PrivateRoute from './Authentication/PrivateRoute';
+import PublicRoute from './Authentication/PublicRoute';
 
 class App extends React.Component
 {
@@ -15,26 +16,14 @@ class App extends React.Component
     return (
       <Router>
         <Switch>
-          <Route exact path = "/">
-            {() => isUserAlreadyAuthenticated(<Register/>)}
-            </Route>
-          <Route exact path = "/login">
-            {() => isUserAlreadyAuthenticated(<Login/>)}
-          </Route>
-          <Route exact path = "/dashboard">
-            {authState.isAuthenticated? <Dashboard/>:<Register/>}
-          </Route>
+          <PublicRoute component={Register} restricted={true} exact path="/" />
+          <PublicRoute component={Login} restricted={true} exact path="/login" />
+          <PrivateRoute component={Dashboard} exact path="/dashboard" />
         </Switch>
       </Router>
 
     )
   }
 }
-
-function isUserAlreadyAuthenticated(Component)
-{
-  return authState.isAuthenticated? <Redirect to="/dashboard"/>:Component
-}
-
 
 export default App;

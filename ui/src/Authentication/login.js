@@ -1,4 +1,4 @@
-import {setAuthState} from "./AuthState";
+import {setAuthState, getAuthState} from "./AuthState";
 import GuyReadingBookSVG from '../svg/guyreadingbook';
 import {login} from "../fetch/fetch";
 import React, {useState} from 'react';
@@ -31,7 +31,7 @@ function LogInForm(props)
     }).then(ok => {
         if (ok)
         {
-           history.push("/dashboard");
+          history.push("/dashboard");
         }
         else
         {

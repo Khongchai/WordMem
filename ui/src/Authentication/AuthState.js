@@ -1,8 +1,3 @@
-export var authState = {
-    "isAuthenticated": localStorage.getItem("isAuthenticated"),
-    "token": localStorage.getItem("token"),
-    "curUser": JSON.stringify(localStorage.getItem("curUser"))
-}
 
 export function setAuthState(dataOfUser, action)
 {
@@ -21,6 +16,20 @@ export function setAuthState(dataOfUser, action)
     }
 
 }
+
+export function getAuthState()
+{
+    return localStorage.getItem("isAuthenticated");
+}
+export function getToken()
+{
+    return localStorage.getItem("token");
+}
+export function getCurrentUser()
+{
+    return localStorage.getItem("curUser");
+}
+
 
 
 
