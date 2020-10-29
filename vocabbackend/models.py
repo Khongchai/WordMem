@@ -3,6 +3,9 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
+    #profilePic = models.ImageField(upload_to="profilepictures")
+    #do this later and get the pillow library 
+    #instruction https://www.geeksforgeeks.org/imagefield-django-models/
     pass
 
 
