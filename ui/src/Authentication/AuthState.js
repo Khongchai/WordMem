@@ -1,22 +1,25 @@
 
-export function setAuthState(dataOfUser, action)
+export function setLocalStorageAuthState(dataOfUser, action)
 {
-    let curUser = JSON.stringify(dataOfUser.user);
-    let token = dataOfUser.token;
-    let isAuthenticated = token && curUser? true: false;
     switch(action)
     {
         case("LOG_IN"):
+            let curUser = JSON.stringify(dataOfUser.user);
+            let token = dataOfUser.token;
+            let isAuthenticated = token && curUser? true: false;
             localStorage.setItem("isAuthenticated", isAuthenticated);
             localStorage.setItem("token", token);
             localStorage.setItem("curUser", curUser);
             return isAuthenticated;
+        case("SIGN_OUT"):
+            localStorage.clear();
         default:
             //do nothing
     }
 
 }
 
+//these should perform check against the server
 export function getAuthState()
 {
     return localStorage.getItem("isAuthenticated");

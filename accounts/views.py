@@ -34,5 +34,7 @@ class LoginAPI(generics.GenericAPIView):
         })
 
 
+
+
 #can do serializer.save(owner = request.user)
 

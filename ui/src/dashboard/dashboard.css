@@ -110,7 +110,11 @@ svg
     padding-top: 10px;
 }
 
-
+.name-capitalized
+{
+    text-transform: capitalize;
+    font-weight: bold;
+}
 
 .dashboard-button
 {

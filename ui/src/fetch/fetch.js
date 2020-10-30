@@ -31,6 +31,23 @@ export const login = (username, password) => fetch("http://127.0.0.1:8000/api/au
 }).then(response => errorCheck(response))
 
 
+export const logout = (token) => fetch("http://127.0.0.1:8000/api/auth/logout", {
+    method: "POST",
+    headers: {
+        "Content-type": "application/json",
+        "X-CSRFToken": csrftoken,
+        "Authorization": `Token ${token}`,
+    }
+}).then(response => response.ok)
+
+export const getVocab = (token) => fetch("http://127.0.0.1:8000/api/vocab", {
+    method:"GET",
+    headers:{
+        "Authorization": `Token ${token}`,
+    }
+})
+
+
 //put token from localStorage in header.
 //export const getVocabfromCurrentUser = ()
 

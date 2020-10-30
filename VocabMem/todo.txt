@@ -1,4 +1,4 @@
 4. Implement a basic landing page for frontend.
-//implement a logout button
-- //for now show all the vocab
- //later only show vocab for those who are logged in.
+Show list of vocab
+
+5. redirect after register

@@ -1,9 +1,39 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './dashboard.css';
 import Book from '../svg/book';
+import {logout} from '../fetch/fetch';
+import {getToken, setLocalStorageAuthState, getCurrentUser} from '../Authentication/AuthState';
+import {useHistory} from 'react-router-dom';
 
-export default function Dasboard()
+
+export default function Dashboard()
 {
+    //store user's vocab within the state of this function
+
+    var history = useHistory();
+    function logUserOut(e)
+    {
+        e.preventDefault();
+        logout(getToken())
+        .then(logoutSuccessful => 
+        {
+            checkLogOutStatAndClearLocalStorage(logoutSuccessful);
+        })
+        
+    }
+    function checkLogOutStatAndClearLocalStorage(ok)
+    {
+        if (ok)
+        {
+            console.log("logout successful");
+            setLocalStorageAuthState(null, "SIGN_OUT");
+            history.push("/login");
+        }
+        else
+        {
+            throw new Error("logout unsuccessful");
+        }
+    }
     return (
         <div className="dashboardNavBar">
             <ul className="navbar-nav">
@@ -15,8 +45,9 @@ export default function Dasboard()
 
                 <li className="nav-item">
                     <div className="user-name">
-                        Pyotr
-                        
+                        <p className="name-capitalized">
+                            {JSON.parse(getCurrentUser()).username}
+                        </p>
                     </div>
                 </li>
                 <br/>
@@ -27,11 +58,11 @@ export default function Dasboard()
                     </div>
                 </li>
 
-                <li className="nav-item">
+                <form className="nav-item" onSubmit={(e)=>logUserOut(e)}>
                     <button className="dashboard-button">
                         Sign Out
                     </button>
-                </li>
+                </form>
             </ul>
         </div>
     )

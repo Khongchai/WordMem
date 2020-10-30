@@ -1,4 +1,4 @@
-import {setAuthState, getAuthState} from "./AuthState";
+import {setLocalStorageAuthState} from "./AuthState";
 import GuyReadingBookSVG from '../svg/guyreadingbook';
 import {login} from "../fetch/fetch";
 import React, {useState} from 'react';
@@ -27,7 +27,7 @@ function LogInForm(props)
   { 
     e.preventDefault();
     login(username, password).then(dataOfUser => {
-      return setAuthState(dataOfUser, "LOG_IN");
+      return setLocalStorageAuthState(dataOfUser, "LOG_IN");
     }).then(ok => {
         if (ok)
         {
@@ -49,6 +49,7 @@ function LogInForm(props)
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} name="password" required />
       
       <div style={{width:"100%", textAlign: "center"}}><button type="submit">Login</button></div>
+      <small>Don't have an account? <Link to="/">Register here</Link></small>
     </form>
   )
 }

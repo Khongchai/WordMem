@@ -4,7 +4,6 @@ import { getAuthState } from './AuthState';
 
 const PrivateRoute = ({component: Component, ...rest}) => 
 {
-    console.log(getAuthState())
     return(
         <Route {...rest} render={props=>(
             getAuthState()? <Component {...props} />: <Redirect to="/"/>

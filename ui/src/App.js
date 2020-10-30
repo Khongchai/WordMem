@@ -7,11 +7,9 @@ import Dashboard from './dashboard/dashboard';
 import PrivateRoute from './Authentication/PrivateRoute';
 import PublicRoute from './Authentication/PublicRoute';
 
-class App extends React.Component
+function App()
 {
   //on start check if user is logged in using Tokenauthentication.
-  render()
-  {
     //Render register page if user is not authenticated.
     return (
       <Router>
@@ -23,7 +21,7 @@ class App extends React.Component
       </Router>
 
     )
-  }
+
 }
 
 export default App;

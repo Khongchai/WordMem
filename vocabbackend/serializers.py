@@ -5,3 +5,5 @@ class VocabSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vocab
         fields = "__all__"
+
+        
