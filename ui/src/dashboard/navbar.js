@@ -1,13 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './dashboard.css';
 import Book from '../svg/book';
-import {logout} from '../fetch/fetch';
+import {logout, getVocab} from '../fetch/fetch';
 import {getToken, setLocalStorageAuthState, getCurrentUser} from '../Authentication/AuthState';
 import {useHistory} from 'react-router-dom';
 
 
+
 export default function Dashboard()
 {
+    const [words, setWords] = useState({});
+
     //store user's vocab within the state of this function
 
     var history = useHistory();
@@ -34,6 +37,12 @@ export default function Dashboard()
             throw new Error("logout unsuccessful");
         }
     }
+
+    useEffect(() => {
+        //get and how list of words.
+      });
+
+
     return (
         <div className="dashboardNavBar">
             <ul className="navbar-nav">
