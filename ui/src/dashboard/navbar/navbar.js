@@ -11,7 +11,7 @@ export default function Navbar(props)
 {
 
     var history = useHistory();
-    function logUserOut(e)
+    function logUserOutAndRedirect(e)
     {
         e.preventDefault();
         logout(getToken())
@@ -62,7 +62,7 @@ export default function Navbar(props)
                     </div>
                 </li>
 
-                <form className="nav-item" onSubmit={(e)=>logUserOut(e)}>
+                <form className="nav-item" onSubmit={(e)=>logUserOutAndRedirect(e)}>
                     <button className="dashboard-button">
                         Sign Out
                     </button>
