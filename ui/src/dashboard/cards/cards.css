@@ -1,0 +1,53 @@
+html{
+    color: white;
+}
+
+#cards-container
+{
+    margin: 30px;
+    display: flex;
+    padding: 3rem;
+    overflow-x: scroll;
+    width: 100%;
+
+
+}
+
+.card
+{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    height: 250px;
+    width: 300px;
+    min-width: 250px;
+    padding: 1.5rem;
+
+    border-radius: 16px;
+    background: #054A91;
+    box-shadow: 0px 4px 60px 2px rgba(12, 12, 12, 0.25);
+    transition: .4s;
+}
+.card:hover
+{
+    transform: translateY(-1rem);
+}
+.card:hover~.card
+{
+    transform: translateX(130px);
+}
+.card:not(:first-child)
+{
+    margin-left: -260px;
+}
+#cards-container::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+
+}
+#cards-container::-webkit-scrollbar-thumb{
+    background: #201c29;
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, .25), inset -2px -2px 2px rgba(0,0,0,.25);
+
+}

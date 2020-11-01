@@ -1,17 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import './dashboard.css';
-import Book from '../svg/book';
-import {logout, getVocab} from '../fetch/fetch';
-import {getToken, setLocalStorageAuthState, getCurrentUser} from '../Authentication/AuthState';
+import '../dashboard.css';
+import Book from '../../svg/book';
+import {logout, getVocab} from '../../fetch/fetch';
+import {getToken, setLocalStorageAuthState, getCurrentUser} from '../../Authentication/AuthState';
 import {useHistory} from 'react-router-dom';
 
 
 
-export default function Dashboard()
+export default function Navbar(props)
 {
-    const [words, setWords] = useState({});
-
-    //store user's vocab within the state of this function
 
     var history = useHistory();
     function logUserOut(e)
@@ -20,7 +17,10 @@ export default function Dashboard()
         logout(getToken())
         .then(logoutSuccessful => 
         {
-            checkLogOutStatAndClearLocalStorage(logoutSuccessful);
+            if (checkLogOutStatAndClearLocalStorage(logoutSuccessful))
+            {
+                history.push("/login");
+            }
         })
         
     }
@@ -28,19 +28,14 @@ export default function Dashboard()
     {
         if (ok)
         {
-            console.log("logout successful");
             setLocalStorageAuthState(null, "SIGN_OUT");
-            history.push("/login");
+            return true
         }
         else
         {
             throw new Error("logout unsuccessful");
         }
     }
-
-    useEffect(() => {
-        //get and how list of words.
-      });
 
 
     return (
@@ -63,7 +58,7 @@ export default function Dashboard()
                 <br/>
                 <li className="nav-item">
                     <div className="vocab-count">
-                        <Book/>: 20
+                        <Book/>: {props.vocabList.length}
                     </div>
                 </li>
 
