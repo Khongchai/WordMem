@@ -1,12 +1,12 @@
 import React from 'react';
-import './cards.css';
+import  './cards.css';
 
-export default function()
+export default function(props)
 {
     return(
         <form className="nav-item add-card-buttons" onSubmit={(e)=>console.log("submitted")}>
             <button className="dashboard-button">
-                Add Card
+                Shuffle
             </button>
         </form>
     )

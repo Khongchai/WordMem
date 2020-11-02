@@ -1,9 +1,13 @@
-4. Implement a basic landing page for frontend.
-Show list of vocab
+redirect after registration
 
-5. redirect after register
+fix UI, maybe use flex for the two main components.
 
+make sure you check for auth with backend again
 
+add card functionality
 
-keep designing ui and fix top shadow
-and add js to keep the left bar or find another way to keep it in place
+implement the shuffle algorithm
+
+implement search algorithm
+
+fix synonyms problem 

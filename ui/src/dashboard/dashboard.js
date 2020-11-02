@@ -23,10 +23,9 @@ export default function Dashboard(props)
     return (
         <dashboard>
             <Navbar vocabList={vocabList}/>
-            <div className="navbar-placeholder"></div>
+            <placeholder className="navbar-placeholder"></placeholder>
             <div className="dashboardMainWindow">
                 <Cards vocabList={vocabList} setMeaning={setMeaning} />
-                <Addcard/>
                 <Description meaning={meaning}/>
             </div>
 

@@ -77,19 +77,12 @@ svg
     --primary-color: #DBE4EE;
     --accent-color: #F17300;
 }
-.navbar-placeholder
-{
-    height: 100vh;
-    width: 250px;
-    display: block;
-}
+
 .dashboardNavBar
 {
 
     background-color: var(--accent-color);
-    position: fixed;
     display: flex;
-
 }
 .dashboardMainWindow
 {
