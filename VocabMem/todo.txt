@@ -8,6 +8,6 @@ add card functionality
 
 implement the shuffle algorithm
 
-implement search algorithm
+implement the search algorithm
 
 fix synonyms problem 

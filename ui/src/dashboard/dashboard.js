@@ -12,7 +12,7 @@ import Addcard from './cards/addcard';
 export default function Dashboard(props)
 {
     const [vocabList, setVocabList] = useState('');
-    const [meaning, setMeaning] = useState('')
+    const [meaning, setMeaning] = useState('');
 
     useEffect(() => {
         getVocab(getToken()).then(vocab => {
@@ -25,7 +25,7 @@ export default function Dashboard(props)
             <Navbar vocabList={vocabList}/>
             <placeholder className="navbar-placeholder"></placeholder>
             <div className="dashboardMainWindow">
-                <Cards vocabList={vocabList} setMeaning={setMeaning} />
+                <Cards vocabList={vocabList} setMeaning={setMeaning} setVocabList={setVocabList}/>
                 <Description meaning={meaning}/>
             </div>
 
@@ -35,3 +35,4 @@ export default function Dashboard(props)
         //Log out button here
     )
 }
+

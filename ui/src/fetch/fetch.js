@@ -47,6 +47,13 @@ export const getVocab = (token) => fetch("http://127.0.0.1:8000/api/vocab", {
     }
 }).then(response => errorCheck(response))
 
+export const addVocab = (token) => fetch("http://127.0.0.1:8000/api/vocab", {
+    method:"POST",
+    headers:{
+        "Authorization": `Token ${token}`,
+    }
+}).then(response => errorCheck(response))
+
 
 //put token from localStorage in header.
 //export const getVocabfromCurrentUser = ()

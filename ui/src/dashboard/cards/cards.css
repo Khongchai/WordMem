@@ -44,7 +44,7 @@
     background: #054A91;
     box-shadow: -30px 4px 60px 2px rgba(12, 12, 12, 0.25);
     cursor:pointer;
-    transition: .4s;
+    transition: .2s;
 }
 .card:first-child{
     box-shadow: none;

@@ -19,8 +19,8 @@ export default function(props)
                         <div className="synonyms">
                             {
                             wordData.synonyms? wordData.synonyms.map(syn => (
-                                <small>{syn}</small>
-                            )): <small>No synonyms added.</small>
+                                <small key={syn}>{syn}</small>
+                            )): <small >No synonyms added.</small>
 
                         }
                         </div>      
@@ -28,8 +28,10 @@ export default function(props)
                 ))}
             </div>
             <Addcard/>
-            <Shuffle/>
+            <Shuffle vocabList={vocabList} setVocabList={props.setVocabList}/>
         </div>
        
     )
 }
+
+
