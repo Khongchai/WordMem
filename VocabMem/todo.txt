@@ -6,8 +6,6 @@ make sure you check for auth with backend again
 
 add card functionality
 
-implement the shuffle algorithm
-
 implement the search algorithm
 
 fix synonyms problem 

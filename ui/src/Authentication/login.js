@@ -35,7 +35,7 @@ function LogInForm(props)
         }
         else
         {
-            //notify incorrect credentials
+            //TODO notify incorrect credentials
         }
     });
   }
