@@ -141,3 +141,9 @@ dashboard
     border-radius: 50%;
     background-color: grey;
 }
+
+.description
+{
+    padding-left: 40px;
+    margin-top: -30px;
+}
