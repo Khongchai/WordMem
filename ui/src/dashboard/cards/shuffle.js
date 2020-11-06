@@ -17,7 +17,9 @@ export default function(props)
             arrForShuffle[currentIndex] = arrForShuffle[randInt];
             arrForShuffle[randInt] = tempVal;
         }
-        props.setVocabList(arrForShuffle);
+        let shuffledArr = arrForShuffle;
+        props.setBothVocabList(shuffledArr);
+
     }
 
     return(

@@ -1,5 +1,5 @@
 import React from 'react';
-import Addcard from './addcard';
+import AddcardButton from './addcardButton';
 import './cards.css';
 import Shuffle from './shuffle';
 import Searchbox from './search';
@@ -8,7 +8,7 @@ import Searchbox from './search';
 export default function(props)
 {
     var vocabList = Array.from(props.vocabList);
-    const secondaryVocabList = Array.from(props.vocabListForReset);
+    const secondaryVocabList = Array.from(props.secondaryVocabList);
     function setMeaningAndSetSynonymList(meaning, synonymIDs)
     {
         props.setMeaning(meaning);
@@ -56,8 +56,8 @@ export default function(props)
                     </article>
                 ))}
             </div>
-            <Addcard/>
-            <Shuffle vocabList={vocabList} setVocabList={props.setVocabList}/>
+            <AddcardButton setBothVocabList={props.setBothVocabList} secondaryVocabList={props.secondaryVocabList}/>
+            <Shuffle vocabList={vocabList} setBothVocabList={props.setBothVocabList}/>
         </div>
        
     )

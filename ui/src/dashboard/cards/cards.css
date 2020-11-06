@@ -17,7 +17,7 @@
     padding-top: 0;
     margin-top: 0px;
     overflow-x: scroll;
-    width: 100%;
+    width: 120%;
     height: 500px;
     align-items: center;
     margin-bottom: 0;
@@ -60,17 +60,14 @@
 }
 .card:not(:first-child)
 {
-    margin-left: -260px;
+    margin-left: -222px;
 }
 #cards-container::-webkit-scrollbar{
-    width: 10px;
-    height: 10px;
+    display: none;
 
 }
 #cards-container::-webkit-scrollbar-thumb{
-    background: #201c29;
-    border-radius: 10px;
-    box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, .25), inset -2px -2px 2px rgba(0,0,0,.25);
+    display: none;
 
 }
 .search-box
@@ -85,5 +82,17 @@
 li
 {
     list-style-type: none;
+}
+.slide-in-from-left
+{
+    animation-name: slide-right;
+    animation-duration: .4s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes slide-right 
+{
+    from {right: -400px;}
+    to {right: 0px;}
 }
 

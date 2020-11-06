@@ -6,7 +6,7 @@ import {getToken} from '../Authentication/AuthState';
 import React, {useState, useEffect} from 'react';
 import Cards from './cards/cards';
 import Description from './description/description';
-import Addcard from './cards/addcard';
+import Addcard from './cards/addcardButton';
 import GuyOnComputer from '../svg/guyoncomputer';
 
 
@@ -17,7 +17,12 @@ export default function Dashboard(props)
     const [meaning, setMeaning] = useState('');
     const [synonymList, setSynonymList] = useState([]);
 
-
+    async function setBothVocabList(list)
+    {
+        setVocabListForReset(list);
+        setVocabList(list);
+        return;
+    }
     useEffect(() => {
         getVocab(getToken()).then(vocab => {
             setVocabList(vocab);
@@ -40,7 +45,8 @@ export default function Dashboard(props)
                 <placeholder className="navbar-placeholder"></placeholder>
                 <div className="dashboardMainWindow">
                     <Cards vocabList={vocabList} setMeaning={setMeaning} setVocabList={setVocabList} 
-                    filterVocab={filterVocab} vocabListForReset={vocabListForReset} setSynonymList={setSynonymList}/>
+                    filterVocab={filterVocab} secondaryVocabList={vocabListForReset} setSynonymList={setSynonymList}
+                    setSecondaryVocabList={setVocabListForReset} setBothVocabList={setBothVocabList}/>
                     <Description meaning={meaning} synonymsList={synonymList} vocabList={vocabListForReset}/>
                 </div>
             </dashboard>
