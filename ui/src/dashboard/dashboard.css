@@ -1,3 +1,6 @@
+:root{
+    --main-left-padding: 40px;
+  }
 @media only screen and (max-width: 600px)
 {
     .dashboardNavBar
@@ -144,6 +147,12 @@ dashboard
 
 .description
 {
-    padding-left: 40px;
+    padding-left: var(--main-left-padding);
     margin-top: -30px;
+}
+.synonym-list
+{
+    margin-top: 30px;
+    font-style: italic;
+    padding-left: var(--main-left-padding);
 }

@@ -14,7 +14,7 @@ class Vocab(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE,  related_name="memorizedWords")
     memorizedOn = models.DateField(auto_now_add=True, null=True, blank=True)
     meaning = models.TextField()
-    synonyms = models.ForeignKey("self", on_delete=models.SET_NULL, null=True, blank=True)
+    synonyms = models.ManyToManyField("self",  blank=True)
 
     def __str__(self):
         return f"{self.word} // {self.memorizedOn.strftime('%#d %b %Y, %#I:%M %p')}"

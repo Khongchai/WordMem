@@ -15,6 +15,7 @@ export default function Dashboard(props)
     const [vocabList, setVocabList] = useState('');
     const [vocabListForReset, setVocabListForReset] = useState('');
     const [meaning, setMeaning] = useState('');
+    const [synonymList, setSynonymList] = useState([]);
 
 
     useEffect(() => {
@@ -39,8 +40,8 @@ export default function Dashboard(props)
                 <placeholder className="navbar-placeholder"></placeholder>
                 <div className="dashboardMainWindow">
                     <Cards vocabList={vocabList} setMeaning={setMeaning} setVocabList={setVocabList} 
-                    filterVocab={filterVocab} vocabListForReset={vocabListForReset}/>
-                    <Description meaning={meaning}/>
+                    filterVocab={filterVocab} vocabListForReset={vocabListForReset} setSynonymList={setSynonymList}/>
+                    <Description meaning={meaning} synonymsList={synonymList} vocabList={vocabListForReset}/>
                 </div>
             </dashboard>
 

@@ -1,11 +1,11 @@
 redirect after registration
 
-fix UI, maybe use flex for the two main components.
-
 make sure you check for auth with backend again
 
-add card functionality
+"Add card" functionality
 
 implement the search algorithm
 
-fix synonyms problem 
+add indication that the list at the bottom is a list of synonym.
+
+regex ignore special character; treat them as normal char
