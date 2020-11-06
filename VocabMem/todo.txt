@@ -9,3 +9,5 @@ implement the search algorithm
 add indication that the list at the bottom is a list of synonym.
 
 regex ignore special character; treat them as normal char
+
+refactor names to secondaryVocabList
