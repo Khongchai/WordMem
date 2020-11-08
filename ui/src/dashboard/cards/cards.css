@@ -92,7 +92,15 @@ li
 
 @keyframes slide-right 
 {
-    from {right: -400px;}
-    to {right: 0px;}
+    from 
+    {
+        right: -400px;
+        opacity: 0;
+    }
+    to 
+    {
+        right: 0px;
+        opacity: 1;
+    }
 }
 
