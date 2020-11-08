@@ -6,48 +6,50 @@ import {getToken} from '../Authentication/AuthState';
 import React, {useState, useEffect} from 'react';
 import Cards from './cards/cards';
 import Description from './description/description';
-import Addcard from './cards/addcardButton';
 import GuyOnComputer from '../svg/guyoncomputer';
+import {useSelector, useDispatch} from 'react-redux';
+import {addCards} from '../actions/addRemoveCards';
 
 
 export default function Dashboard(props)
 {
-    const [vocabList, setVocabList] = useState('');
-    const [vocabListForReset, setVocabListForReset] = useState('');
+    //mutableVocabList can change, for example, when user filter for a word
+    //whereas primary reflects the actual list the user has.
+    const immutableVocabList = useSelector(state => state.vocabList);
+    const [mutableVocabList, setmutableVocabList] = useState('');
+    const dispatch = useDispatch();
     const [meaning, setMeaning] = useState('');
     const [synonymList, setSynonymList] = useState([]);
 
-    async function setBothVocabList(list)
+    async function setBothVocabLists(list)
     {
-        setVocabListForReset(list);
-        setVocabList(list);
+        dispatch(addCards(list));
+        setmutableVocabList(list);
         return;
     }
+
     useEffect(() => {
-        getVocab(getToken()).then(vocab => {
-            setVocabList(vocab);
-            //secondary list for retrieval of the original 
-            //value should something happen to the first
-            setVocabListForReset(vocab);
+        getVocab(getToken()).then(list => {
+            setBothVocabLists(list);
         })
       }, []);
     
     function filterVocab(filteredArray)
     {
-        setVocabList(filteredArray);
+        setmutableVocabList(filteredArray);
     }
 
     return (
         <div>
             <GuyOnComputer/>
             <dashboard>
-                <Navbar vocabList={vocabListForReset}/>
+                <Navbar/>
                 <placeholder className="navbar-placeholder"></placeholder>
                 <div className="dashboardMainWindow">
-                    <Cards vocabList={vocabList} setMeaning={setMeaning} setVocabList={setVocabList} 
-                    filterVocab={filterVocab} secondaryVocabList={vocabListForReset} setSynonymList={setSynonymList}
-                    setSecondaryVocabList={setVocabListForReset} setBothVocabList={setBothVocabList}/>
-                    <Description meaning={meaning} synonymsList={synonymList} vocabList={vocabListForReset}/>
+                    <Cards vocabList={mutableVocabList} setMeaning={setMeaning}  
+                    filterVocab={filterVocab} setSynonymList={setSynonymList}
+                    setBothVocabLists={setBothVocabLists}/>
+                    <Description meaning={meaning} synonymsList={synonymList}/>
                 </div>
             </dashboard>
 

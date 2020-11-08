@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
+import {useSelector} from 'react-redux';
 export default function(props)
 {
     const [searchbox, setSearchBox] = useState("");
-    const wordList = props.vocabListForReset.map(vocab => vocab.word);
+    const immutableVocabList = useSelector(state => state.vocabList);
 
     function setSearchValueAndFilter(filterValue)
     {
@@ -17,12 +18,12 @@ export default function(props)
     function getFilteredList(filterValue)
     {
         var newArr = [];
-        var regex = new RegExp(filterValue, "gi");
-        for (let i = 0; i < wordList.length; i++)
+        var regex = new RegExp(escapeRegExp(filterValue), "gi");
+        for (let i = 0; i < immutableVocabList.length; i++)
         {
-            if(regex.test(wordList[i]))
+            if(regex.test(immutableVocabList[i].word))
             {
-                newArr.push(props.vocabListForReset[i]);
+                newArr.push(immutableVocabList[i]);
             }
         }
         return newArr;
@@ -36,3 +37,7 @@ export default function(props)
         value={searchbox} onChange={(e) => (setSearchValueAndFilter(e.target.value))}/>
     )
 }
+
+function escapeRegExp(string) {
+    return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+  }

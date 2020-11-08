@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
-import vocabCards from './cardReducer';
+import vocabList from './cardReducer';
 
 
 const allReducers = combineReducers({
-    vocabCards
+    vocabList
 });
 
 export default allReducers;

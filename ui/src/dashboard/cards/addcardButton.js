@@ -1,9 +1,11 @@
 import React from 'react';
 import {addVocab}   from '../../fetch/fetch';
 import './cards.css';
+import {useSelector} from 'react-redux';
 
 export default function(props)
 {
+    let currList = useSelector(state => state.vocabList);
     function addCard(e)
     {
         e.preventDefault();
@@ -15,9 +17,8 @@ export default function(props)
     }
     function concatenateCurrentList()
     {
-        let currList = [...props.secondaryVocabList];
         //TODO for now, dummy values. Later, fill the empty object with info from a form
-        let newList = { "id": 6, 
+        let newList = { "id": 9, 
                         "meaning": "test test",
                         "memorizedOn": "2020-11-06",
                         "owner": 2,
@@ -35,9 +36,12 @@ export default function(props)
 
     async function setVocabAndAddAnimation(newList)
     {
-        await props.setBothVocabList(newList);
-        let lastCard = document.querySelectorAll(".card:last-child");
-        lastCard[0].classList.add("slide-in-from-left");
+        props.setBothVocabLists(newList).
+        then(() => {
+            let lastCard = document.querySelectorAll(".card:last-child");
+            lastCard[0].classList.add("slide-in-from-left");
+        });
+        
     }
     return(
         <form className="nav-item add-card-buttons" onSubmit={(e)=>addCard(e)}>

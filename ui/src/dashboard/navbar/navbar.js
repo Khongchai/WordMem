@@ -1,15 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import '../dashboard.css';
 import Book from '../../svg/book';
 import {logout, getVocab} from '../../fetch/fetch';
 import {getToken, setLocalStorageAuthState, getCurrentUser} from '../../Authentication/AuthState';
 import {useHistory} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
 
 
-export default function Navbar(props)
+export default function Navbar()
 {
-
+    const vocabList = useSelector(state => state.vocabList);
     var history = useHistory();
     function logUserOutAndRedirect(e)
     {
@@ -58,7 +59,7 @@ export default function Navbar(props)
                 <br/>
                 <li className="nav-item">
                     <div className="vocab-count">
-                        <Book/>: {props.vocabList.length}
+                        <Book/>: {vocabList.length}
                     </div>
                 </li>
 

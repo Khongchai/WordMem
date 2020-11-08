@@ -3,12 +3,13 @@ import AddcardButton from './addcardButton';
 import './cards.css';
 import Shuffle from './shuffle';
 import Searchbox from './search';
+import {useSelector} from 'react-redux';
 
 
 export default function(props)
 {
-    var vocabList = Array.from(props.vocabList);
-    const secondaryVocabList = Array.from(props.secondaryVocabList);
+    var mutableVocabList = Array.from(props.vocabList);
+    const immutableVocabList = useSelector(state => state.vocabList);
     function setMeaningAndSetSynonymList(meaning, synonymIDs)
     {
         props.setMeaning(meaning);
@@ -22,12 +23,12 @@ export default function(props)
     }
     function getSynonymFromID(id)
     {
-        let length = secondaryVocabList.length;
+        let length = immutableVocabList.length;
         for (let i = 0; i < length; i++)
         {
-            if (secondaryVocabList[i].id === id)
+            if (immutableVocabList[i].id === id)
             {
-                let synonym = secondaryVocabList[i].word;
+                let synonym = immutableVocabList[i].word;
                 return synonym;
             }
         }
@@ -35,10 +36,10 @@ export default function(props)
 
     return(
         <div id="top-component">
-            <Searchbox setVocabList={props.setVocabList} filterVocab={props.filterVocab} vocabListForReset={secondaryVocabList}/>
+            <Searchbox setVocabList={props.setVocabList} filterVocab={props.filterVocab}/>
             <div id="cards-container">
-                {vocabList.map(wordData => (
-                    <article className="card" onClick={() => setMeaningAndSetSynonymList(wordData.meaning, wordData.synonyms)}>
+                {mutableVocabList.map(wordData => (
+                    <article key={wordData.id} className="card" onClick={() => setMeaningAndSetSynonymList(wordData.meaning, wordData.synonyms)}>
                         <header>
                             <p>{wordData.memorizedOn}</p>
                             <h2>{wordData.word}</h2>
@@ -48,7 +49,7 @@ export default function(props)
                                 {
                                     wordData.synonyms.length > 0? 
                                     <small>Synonyms: {wordData.synonyms.length}</small>
-                                    : <small >No synonyms added.</small>
+                                    :<small >No synonyms added.</small>
                                 }
                             </ui>
                             
@@ -56,8 +57,8 @@ export default function(props)
                     </article>
                 ))}
             </div>
-            <AddcardButton setBothVocabList={props.setBothVocabList} secondaryVocabList={props.secondaryVocabList}/>
-            <Shuffle vocabList={vocabList} setBothVocabList={props.setBothVocabList}/>
+            <AddcardButton setBothVocabLists={props.setBothVocabLists} immutableVocabList={props.immutableVocabList}/>
+            <Shuffle vocabList={mutableVocabList} setBothVocabList={props.setBothVocabList}/>
         </div>
        
     )
