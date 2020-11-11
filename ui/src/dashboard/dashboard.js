@@ -9,6 +9,7 @@ import Description from './description/description';
 import GuyOnComputer from '../svg/guyoncomputer';
 import {useSelector, useDispatch} from 'react-redux';
 import {addCards} from '../actions/addRemoveCards';
+import AddCardForm from './cards/addCardForm';
 
 
 export default function Dashboard(props)
@@ -41,6 +42,7 @@ export default function Dashboard(props)
 
     return (
         <div>
+            <AddCardForm/>
             <GuyOnComputer/>
             <dashboard>
                 <Navbar/>

@@ -81,3 +81,15 @@ span.psw {
   float: right;
   padding-top: 16px;
 }
+
+#add-card-form
+{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    opacity: 0.86;
+    z-index: 1000000;
+    display: none;
+    cursor: pointer;
+}

@@ -1,9 +1,18 @@
 import React from 'react';
 
-export function AddCardForm(props)
+export default function (props)
 {
     var newCard = {};
     
-    return("form place holder")
+    return(
+        <div id="add-card-form" onClick={(e) => {hideForm(e)}}>
+            
+        </div>
+    )
+}
+
+function hideForm(e)
+{
+    e.target.style.display = "none";
 }
 

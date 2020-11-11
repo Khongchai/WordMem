@@ -2,13 +2,19 @@ import React from 'react';
 import {addVocab}   from '../../fetch/fetch';
 import './cards.css';
 import {useSelector} from 'react-redux';
-
 export default function(props)
 {
     let currList = useSelector(state => state.vocabList);
-    function addCard(e)
+
+    function showForm()
     {
-        e.preventDefault();
+        document.getElementById("add-card-form").style.display = "block";
+        //show form
+        //take info from form on submit
+        // call addCard()
+    }
+    function addCard()
+    {
         if (sendFetchToServer())
         {
             concatenateCurrentList();
@@ -44,10 +50,8 @@ export default function(props)
         
     }
     return(
-        <form className="nav-item add-card-buttons" onSubmit={(e)=>addCard(e)}>
-            <button className="dashboard-button">
-                Add Card
-            </button>
-        </form>
+        <button className="dashboard-button add-card-buttons" onClick={() => showForm()}>
+            Add Card
+        </button>
     );
 }

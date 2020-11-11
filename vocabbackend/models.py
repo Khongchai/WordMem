@@ -17,7 +17,7 @@ class Vocab(models.Model):
     synonyms = models.ManyToManyField("self",  blank=True)
 
     def __str__(self):
-        return f"{self.word} // {self.memorizedOn.strftime('%#d %b %Y, %#I:%M %p')}"
+        return f"{self.word}"
 
 
 
