@@ -6,8 +6,10 @@ make sure you check for auth with backend again
 
 implement the search algorithm
 
-add indication that the list at the bottom is a list of synonym.
+add an indication that the list at the bottom is a list of synonym.
 
 regex ignore special character; treat them as normal char
 
 refactor auth to redux
+
+learn Typescript

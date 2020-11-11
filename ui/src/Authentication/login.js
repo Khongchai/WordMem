@@ -4,8 +4,9 @@ import {login} from "../fetch/fetch";
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import loginfetch from './loginfetch';
 
-function Login(props)
+function Login()
 {
     return (
       <div id="loginContainer">
@@ -15,7 +16,7 @@ function Login(props)
         </div>
         <GuyReadingBookSVG />
       </div>
-    )
+    );
 }
 
 function LogInForm(props)
@@ -23,24 +24,21 @@ function LogInForm(props)
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   let history = useHistory();
-  function logUserIn(e)
+
+  async function logUserIn()
   { 
-    e.preventDefault();
-    login(username, password).then(dataOfUser => {
-      return setLocalStorageAuthState(dataOfUser, "LOG_IN");
-    }).then(ok => {
-        if (ok)
-        {
-          history.push("/dashboard");
-        }
-        else
-        {
-            //TODO notify incorrect credentials
-        }
-    });
+    const ok = await loginfetch(username, password)
+    handleRedirect(ok);
+  }
+  
+  function handleRedirect(ok)
+  {
+    let อิอิ = ok? history.push("/dashboard"):null;
   }
   return(
-    <form style={{padding: "10px"}} onSubmit={(e) => {logUserIn(e)}}>
+    <form style={{padding: "10px"}} onSubmit={(e) => {
+      e.preventDefault();
+      logUserIn();}}>
 
       <label for="username"><b>Username</b></label>
       <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} name="username" required />

@@ -9,6 +9,7 @@ import PublicRoute from './Authentication/PublicRoute';
 
 function App()
 {
+
   //on start check if user is logged in using Tokenauthentication.
     //Render register page if user is not authenticated.
     return (

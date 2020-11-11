@@ -2,9 +2,9 @@ import '../App.css';
 import { register } from '../fetch/fetch';
 import GuyReadingBookSVG from '../svg/guyreadingbook';
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
-
-
+import {Link, useHistory} from 'react-router-dom';
+import loginfetch from './loginfetch';
+import {setLocalStorageAuthState} from "./AuthState";
 
 function Register(props)
 {
@@ -24,17 +24,30 @@ function RegisterForm(props)
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  function registerUser(e)
+  const history = useHistory();
+
+  function registerUser()
   { 
-    e.preventDefault();
-    //TODO => log the user in with the data and then redirect to homepage.
-    register(username, password, email).then(dataForNewUser => {
-      console.log(dataForNewUser);
-    });
+    register(username, password, email)
+    .then(dataOfNewUser => reDirectAfterRegister(dataOfNewUser));
   }
+  async function reDirectAfterRegister(dataOfNewUser)
+  {
+    const ok = setLocalStorageAuthState(dataOfNewUser, "LOG_IN");
+    handleRedirect(ok);
+  }
+
+  function handleRedirect(ok)
+  {
+    let อิอิ = ok? history.push("/dashboard"):null;
+  }
+
   return(
     <div>
-      <form style={{padding: "10px"}} onSubmit={(e) => {registerUser(e)}}>
+      <form style={{padding: "10px"}} onSubmit={(e) => {
+                                                          e.preventDefault();
+                                                          registerUser(e)
+                                                        }}>
         <label for="email"><b>Email</b></label>
         <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} name="email" required />
 
