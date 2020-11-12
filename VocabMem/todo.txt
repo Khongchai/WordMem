@@ -4,12 +4,6 @@ make sure you check for auth with backend again
 
 "Add card" functionality >> now that the API is done, time to implement the frontend now
 
-implement the search algorithm
-
-add an indication that the list at the bottom is a list of synonym.
-
-regex ignore special character; treat them as normal char
-
 refactor auth to redux
 
 learn Typescript
