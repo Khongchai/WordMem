@@ -2,7 +2,7 @@ redirect after registration
 
 make sure you check for auth with backend again
 
-"Add card" functionality >> now that the API is done, time to implement the frontend now
+"Add card" functionality >> now that the API @is done, time to implement the frontend now >> continue working on frontend
 
 refactor auth to redux
 

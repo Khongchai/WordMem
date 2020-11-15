@@ -8,7 +8,7 @@ export default function(props)
 
     function showForm()
     {
-        document.getElementById("add-card-form").style.display = "block";
+        document.getElementById("add-card-form").style.display = "flex";
         //show form
         //take info from form on submit
         // call addCard()
