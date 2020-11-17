@@ -34,7 +34,7 @@ export default function(props)
 
         setVocabAndAddAnimation(newList);
     }
-    function sendFetchToServer()
+    async function sendFetchToServer()
     {
         //TODO, make actual fetch. Return true for now.
         return true;

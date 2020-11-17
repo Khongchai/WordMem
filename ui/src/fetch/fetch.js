@@ -47,11 +47,14 @@ export const getVocab = (token) => fetch("http://127.0.0.1:8000/api/vocab", {
     }
 }).then(response => errorCheck(response))
 
-export const addVocab = (token) => fetch("http://127.0.0.1:8000/api/vocab", {
+export const addVocab = (token, newCard) => fetch("http://127.0.0.1:8000/api/vocab/", {
     method:"POST",
     headers:{
+        "Content-type": "application/json",
+        "X-CSRFToken": csrftoken,
         "Authorization": `Token ${token}`,
-    }
+    },
+    body: JSON.stringify(newCard)
 }).then(response => errorCheck(response))
 
 

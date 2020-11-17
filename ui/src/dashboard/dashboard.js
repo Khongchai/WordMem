@@ -4,12 +4,13 @@ import Navbar from './navbar/navbar';
 import {getVocab} from '../fetch/fetch';
 import {getToken} from '../Authentication/AuthState';
 import React, {useState, useEffect} from 'react';
-import Cards from './cards/cards';
+import Cards from './cards/cardsSection';
 import Description from './description/description';
 import GuyOnComputer from '../svg/guyoncomputer';
 import {useSelector, useDispatch} from 'react-redux';
 import {addCards} from '../actions/addRemoveCards';
 import AddCardForm from './cards/addCardForm';
+import Toast from './toast';
 
 
 export default function Dashboard(props)
@@ -42,7 +43,7 @@ export default function Dashboard(props)
 
     return (
         <div>
-            <AddCardForm/>
+            <AddCardForm setBothVocabLists={setBothVocabLists}/>
             <GuyOnComputer/>
             <dashboard>
                 <Navbar/>
@@ -54,6 +55,7 @@ export default function Dashboard(props)
                     <Description meaning={meaning} synonymsList={synonymList}/>
                 </div>
             </dashboard>
+            <Toast/>
 
         </div>
         
