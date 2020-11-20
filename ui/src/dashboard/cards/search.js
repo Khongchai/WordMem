@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
-export default function(props)
+export default function Search(props)
 {
     const [searchbox, setSearchBox] = useState("");
     const immutableVocabList = useSelector(state => state.vocabList);

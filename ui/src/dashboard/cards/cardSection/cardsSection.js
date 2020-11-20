@@ -1,13 +1,16 @@
-import React from 'react';
-import AddcardButton from './addcardButton';
-import './cards.css';
-import Shuffle from './shuffle';
-import Searchbox from './search';
+import React, {useEffect} from 'react';
+import AddcardButton from '../addcardButton';
+import '../cards.css';
+import Shuffle from '../shuffle';
+import Searchbox from '../search';
 import {useSelector} from 'react-redux';
-import CardsContainer from './cardsContainer';
+import CardsContainer from '../cardsContainer';
+import detectKeyPressed from './detectKeyPressed';
 
 
-export default function(props)
+detectKeyPressed();
+
+export default function CardSection(props)
 {
     var mutableVocabList = Array.from(props.vocabList);
     const immutableVocabList = useSelector(state => state.vocabList);
@@ -40,10 +43,11 @@ export default function(props)
             <Searchbox setVocabList={props.setVocabList} filterVocab={props.filterVocab}/>
             <CardsContainer mutableVocabList={mutableVocabList} setMeaningAndSetSynonymList={setMeaningAndSetSynonymList}/>
             <AddcardButton setBothVocabLists={props.setBothVocabLists} immutableVocabList={props.immutableVocabList}/>
-            <Shuffle vocabList={mutableVocabList} setBothVocabList={props.setBothVocabList}/>
+            <Shuffle vocabList={mutableVocabList} setBothVocabLists={props.setBothVocabLists}/>
         </div>
        
     )
 }
+
 
 

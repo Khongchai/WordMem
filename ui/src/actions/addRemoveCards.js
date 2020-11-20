@@ -5,3 +5,11 @@ export const addCards = (list) =>
         payload: list
     }
 }
+
+export const removeCard = (id) =>
+{
+    return{
+        type: "REMOVE_CARD",
+        payload: id
+    }
+}

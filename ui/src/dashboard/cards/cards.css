@@ -113,4 +113,8 @@ li
         opacity: 1;
     }
 }
+.delete-indicator:hover
+{
+    background-color: red;
+}
 

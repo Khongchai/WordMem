@@ -1,10 +1,10 @@
 import {} from '../fetch/fetch';
 import './dashboard.css';
 import Navbar from './navbar/navbar';
-import {getVocab} from '../fetch/fetch';
+import {getVocab, deleteCard} from '../fetch/fetch';
 import {getToken} from '../Authentication/AuthState';
 import React, {useState, useEffect} from 'react';
-import Cards from './cards/cardsSection';
+import Cards from './cards/cardSection/cardsSection';
 import Description from './description/description';
 import GuyOnComputer from '../svg/guyoncomputer';
 import {useSelector, useDispatch} from 'react-redux';
@@ -40,6 +40,11 @@ export default function Dashboard(props)
     {
         setmutableVocabList(filteredArray);
     }
+    async function deleteCard(id)
+    {
+        deleteCard(getToken(), id)
+        .then()
+    }
 
     return (
         <div>
@@ -51,7 +56,7 @@ export default function Dashboard(props)
                 <div className="dashboardMainWindow">
                     <Cards vocabList={mutableVocabList} setMeaning={setMeaning}  
                     filterVocab={filterVocab} setSynonymList={setSynonymList}
-                    setBothVocabLists={setBothVocabLists}/>
+                    setBothVocabLists={setBothVocabLists} deleteCard={deleteCard}/>
                     <Description meaning={meaning} synonymsList={synonymList}/>
                 </div>
             </dashboard>

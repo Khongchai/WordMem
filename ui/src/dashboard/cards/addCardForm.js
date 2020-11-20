@@ -4,7 +4,7 @@ import {addVocab} from '../../fetch/fetch';
 import {getToken} from '../../Authentication/AuthState';
 import {showToast} from '../toast';
 
-export default function (props)
+export default function AddCardForm (props)
 {
     const [word, setWord] = useState("");
     const [meaning, setMeaning] = useState("");

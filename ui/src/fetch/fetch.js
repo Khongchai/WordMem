@@ -57,7 +57,13 @@ export const addVocab = (token, newCard) => fetch("http://127.0.0.1:8000/api/voc
     body: JSON.stringify(newCard)
 }).then(response => errorCheck(response))
 
-
-//put token from localStorage in header.
-//export const getVocabfromCurrentUser = ()
+export const removeVocab = (token, id) => fetch("http://127.0.0.1:8000/api/vocab/", {
+    method:"POST",
+    headers:{
+        "Content-type": "application/json",
+        "X-CSRFToken": csrftoken,
+        "Authorization": `Token ${token}`,
+    },
+    body: id
+}).then(response => errorCheck(response))
 
