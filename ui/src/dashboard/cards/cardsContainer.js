@@ -1,10 +1,15 @@
 import React from 'react';
 export default function CardsContainer(props)
 {
+    function handleClick(wordData)
+    {
+        props.setMeaningAndSetSynonymList(wordData.meaning, wordData.synonyms);
+        props.deleteCard(wordData.id);
+    }
     return(
         <div id="cards-container">
         {props.mutableVocabList.map(wordData => (
-            <article key={wordData.id} className="card" onClick={() => props.setMeaningAndSetSynonymList(wordData.meaning, wordData.synonyms)}>
+            <article key={wordData.id} className="card" onClick={() => handleClick(wordData)}>
                 <header>
                     <p>{wordData.memorizedOn}</p>
                     <h2>{wordData.word}</h2>

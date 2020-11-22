@@ -7,7 +7,7 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import allReducers from './reducers/combineReducer';
 
-const store = createStore(
+export const store = createStore(
                         allReducers,
                         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
@@ -24,3 +24,5 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+

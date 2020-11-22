@@ -1,22 +1,23 @@
-import {useSelector, useDispatch} from 'react-redux';
-import React from 'react';
-export default function detectKeyPressed(props)
+import {allowDelete} from "../../../actions/allowDelete";
+import {store} from "../../../index";
+export default function detectKeyPressed()
 {
-    let allowDelete = useSelector(state => state.allowDelete);
-    let dispatch = useDispatch(); 
+    
     document.addEventListener("keydown", function(e) {
         if (e.key === "Control")
         {
             addORremoveDeleteIndicator("ADD");
-            dispatch(allowDelete(true));
+            store.dispatch(allowDelete(true));
         }
     });
     document.addEventListener("keyup", function(e)
     {
-        addORremoveDeleteIndicator("REMOVE");
-        dispatch(allowDelete(false));
+        if (e.key === "Control")
+        {
+            addORremoveDeleteIndicator("REMOVE");
+            store.dispatch(allowDelete(false));
+        }
     });
-    return(null);
 }
 
 function addORremoveDeleteIndicator(action)

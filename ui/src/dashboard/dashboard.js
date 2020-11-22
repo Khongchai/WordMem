@@ -18,6 +18,7 @@ export default function Dashboard(props)
     //mutableVocabList can change, for example, when user filter for a word
     //whereas primary reflects the actual list the user has.
     const immutableVocabList = useSelector(state => state.vocabList);
+    const canDelete = useSelector(state => state.allowDelete);
     const [mutableVocabList, setmutableVocabList] = useState('');
     const dispatch = useDispatch();
     const [meaning, setMeaning] = useState('');
@@ -42,8 +43,13 @@ export default function Dashboard(props)
     }
     async function deleteCard(id)
     {
-        deleteCard(getToken(), id)
-        .then()
+        if (canDelete)
+        {
+            console.log(`Delete card id = ${id}`);
+            //deleteCard(getToken(), id)
+            //.then()
+        }
+        
     }
 
     return (

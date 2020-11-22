@@ -41,7 +41,7 @@ export default function CardSection(props)
     return(
         <div id="top-component">
             <Searchbox setVocabList={props.setVocabList} filterVocab={props.filterVocab}/>
-            <CardsContainer mutableVocabList={mutableVocabList} setMeaningAndSetSynonymList={setMeaningAndSetSynonymList}/>
+            <CardsContainer deleteCard={props.deleteCard} mutableVocabList={mutableVocabList} setMeaningAndSetSynonymList={setMeaningAndSetSynonymList}/>
             <AddcardButton setBothVocabLists={props.setBothVocabLists} immutableVocabList={props.immutableVocabList}/>
             <Shuffle vocabList={mutableVocabList} setBothVocabLists={props.setBothVocabLists}/>
         </div>
