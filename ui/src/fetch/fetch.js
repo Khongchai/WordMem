@@ -57,13 +57,12 @@ export const addVocab = (token, newCard) => fetch("http://127.0.0.1:8000/api/voc
     body: JSON.stringify(newCard)
 }).then(response => errorCheck(response))
 
-export const removeVocab = (token, id) => fetch("http://127.0.0.1:8000/api/vocab/", {
-    method:"POST",
+export const deleteVocab = (token, id) => fetch(`http://127.0.0.1:8000/api/vocab/${id}/`, {
+    method:"DELETE",
     headers:{
         "Content-type": "application/json",
         "X-CSRFToken": csrftoken,
         "Authorization": `Token ${token}`,
-    },
-    body: id
+    }
 }).then(response => errorCheck(response))
 

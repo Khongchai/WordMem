@@ -1,7 +1,7 @@
 import {} from '../fetch/fetch';
 import './dashboard.css';
 import Navbar from './navbar/navbar';
-import {getVocab, deleteCard} from '../fetch/fetch';
+import {getVocab, deleteVocab} from '../fetch/fetch';
 import {getToken} from '../Authentication/AuthState';
 import React, {useState, useEffect} from 'react';
 import Cards from './cards/cardSection/cardsSection';
@@ -45,9 +45,10 @@ export default function Dashboard(props)
     {
         if (canDelete)
         {
-            console.log(`Delete card id = ${id}`);
-            //deleteCard(getToken(), id)
-            //.then()
+            deleteVocab(getToken(), id)
+            .then(newList=> {
+                setBothVocabLists(newList);
+            })
         }
         
     }

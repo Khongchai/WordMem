@@ -8,5 +8,6 @@ refactor auth to redux
 
 learn Typescript
 
-refactor allowdelete back to normal function and manage the allow delete in there instead
-of through redux: not necessary, doing so adds another stupid layer of complexity
+Add deletion animation
+
+Learn webscrape and implement the ability to get meaning from different online dictionaries.

@@ -17,10 +17,14 @@ class VocabAPI(viewsets.ModelViewSet):
     serializer_class = VocabSerializer
     permission_classes = [IsAuthenticated,]
 
-    def get_queryset(self):
-        return self.request.user.memorizedWords.all()
+    def list(self, request):
+        print("list")
+        queryset = self.request.user.memorizedWords.all()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
     def create(self, request, *args, **kwargs):
+        print("create")
         data = request.data
         word = data["word"]
         meaning = data["meaning"]
@@ -31,8 +35,16 @@ class VocabAPI(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         new_vocab = serializer.save()
 
-
         return Response(VocabSerializer(new_vocab).data)
+
+    def destroy(self, request, pk):
+        print("delete")
+        vocab_to_be_deleted = Vocab.objects.get(pk=pk)
+        vocab_to_be_deleted.delete()
+        
+        queryset = self.request.user.memorizedWords.all()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 

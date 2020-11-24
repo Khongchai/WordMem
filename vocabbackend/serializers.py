@@ -16,6 +16,7 @@ class AddNewVocab(serializers.ModelSerializer):
 
     def create(self, validated_data):
         
+        #get list of synonym ids, get synonyms out, then combine together in the new vocab obj
         synonyms_id = get_syn_id(validated_data["synonyms"])
         validated_data.pop("synonyms")
 
@@ -23,6 +24,8 @@ class AddNewVocab(serializers.ModelSerializer):
         vocab.synonyms.add(*synonyms_id)
 
         return vocab
+
+    
 
 
         
