@@ -5,6 +5,7 @@ export default function(props)
     const synonymList = [...props.synonymsList];
     return(
         <div>
+            
             <div className="description">
                 {props.meaning}
             </div> 

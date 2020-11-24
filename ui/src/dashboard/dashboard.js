@@ -49,6 +49,7 @@ export default function Dashboard(props)
             .then(newList=> {
                 setBothVocabLists(newList);
             })
+            
         }
         
     }

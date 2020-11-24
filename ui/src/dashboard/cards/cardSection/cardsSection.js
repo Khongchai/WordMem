@@ -13,11 +13,15 @@ detectKeyPressed();
 export default function CardSection(props)
 {
     var mutableVocabList = Array.from(props.vocabList);
+    const canDelete = useSelector(state => state.allowDelete);
     const immutableVocabList = useSelector(state => state.vocabList);
     function setMeaningAndSetSynonymList(meaning, synonymIDs)
     {
-        props.setMeaning(meaning);
-        props.setSynonymList(getSynonymListFromIDs(synonymIDs));
+        if (!canDelete)
+        {
+            props.setMeaning(meaning);
+            props.setSynonymList(getSynonymListFromIDs(synonymIDs));
+        }
     }
 
     function getSynonymListFromIDs(IDs)
