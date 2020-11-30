@@ -15,11 +15,22 @@ def get_syn_id(synonym_list_strings):
     return synonym_list_id
 
 
-def get_array_of_definitions(list_of_html):
+def get_list_of_definitions(word):
     """
-    Returns an array of definitions. Accept a list of html and the return
-    array contains the innerHTML of all html 
+    Returns an array of definitions. Accept a word and the return
+    array contains the innerHTML content of all definitions
     """
+
+    headers = {
+        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
+    }
+
+    url = 'https://dictionary.cambridge.org/dictionary/english/{word}'
+
+    page = requests.get(url, headers=headers)
+    soup = BeautifulSoup(page.content, 'html.parser')
+    list_of_html = soup.find_all(class_="def ddef_d db")
+
     text_array = []
     for html in list_of_html:
         text_array.append(html.text)

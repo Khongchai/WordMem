@@ -9,8 +9,8 @@ from django.urls import reverse
 from rest_framework import generics
 from rest_framework import viewsets, permissions
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .utils import get_syn_id
-
+from .utils import get_syn_id, get_list_of_definitions
+from rest_framework.decorators import api_view
 
 
 class VocabAPI(viewsets.ModelViewSet):
@@ -45,6 +45,15 @@ class VocabAPI(viewsets.ModelViewSet):
         queryset = self.request.user.memorizedWords.all()
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
+
+#TODO: 
+@api_view(['GET'])
+def get_definitions(request, word):
+    definition_list = get_list_of_definitions(word)
+    return Response(definition_list)
+
+
 
 
 
