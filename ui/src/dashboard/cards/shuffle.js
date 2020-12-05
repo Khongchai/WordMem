@@ -1,7 +1,7 @@
 import React from 'react';
 import  './cards.css';
 
-export default function(props)
+export default function Shuffle(props)
 {
     function shuffle(e, arrForShuffle)
     {

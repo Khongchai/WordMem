@@ -10,5 +10,4 @@ learn Typescript
 
 Add deletion animation
 
-Learn webscrape and implement the ability to get meaning from different online dictionaries -> add link
-in urls.py to get_definitions function -> call the function thorugh fetch from React
+Create button that will call cambridgeapi 

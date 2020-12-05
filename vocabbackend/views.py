@@ -9,7 +9,7 @@ from django.urls import reverse
 from rest_framework import generics
 from rest_framework import viewsets, permissions
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .utils import get_syn_id, get_list_of_definitions
+from .utils import get_syn_id, get_list_of_definitions_cambridge
 from rest_framework.decorators import api_view
 
 
@@ -18,13 +18,11 @@ class VocabAPI(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated,]
 
     def list(self, request):
-        print("list")
         queryset = self.request.user.memorizedWords.all()
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
     def create(self, request, *args, **kwargs):
-        print("create")
         data = request.data
         word = data["word"]
         meaning = data["meaning"]
@@ -38,7 +36,6 @@ class VocabAPI(viewsets.ModelViewSet):
         return Response(VocabSerializer(new_vocab).data)
 
     def destroy(self, request, pk):
-        print("delete")
         vocab_to_be_deleted = Vocab.objects.get(pk=pk)
         vocab_to_be_deleted.delete()
         
@@ -47,30 +44,24 @@ class VocabAPI(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-#TODO: 
+class GetDefinitionAPICambridge(viewsets.ViewSet):
+
+    def retrieve(self, request, pk):
+        word = (Vocab.objects.get(pk=pk)).word
+        list_of_definitions = get_list_of_definitions_cambridge(word)
+        return Response(list_of_definitions)
+
+    
+
+
+"""
 @api_view(['GET'])
 def get_definitions(request, word):
     definition_list = get_list_of_definitions(word)
     return Response(definition_list)
-
-
-
-
-
-
 """
-Configure the authentication system
-Then create a login page 
-Write custom edit delete and create views taking into account the currently logged in user
 
-class EditVocab(generics.UpdateAPIView):
-    queryset = Vocab.objects.all().order_by("-id")
-    serializer_class = VocabSerializer
 
-class DeleteVocab(generics.DestroyAPIView):
-    queryset = Vocab.objects.all().order_by("-id")
-    serializer_class = VocabSerializer
-"""
 
 
 

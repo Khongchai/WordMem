@@ -66,3 +66,10 @@ export const deleteVocab = (token, id) => fetch(`http://127.0.0.1:8000/api/vocab
     }
 }).then(response => errorCheck(response))
 
+export const cambridgeDefinitionAPI = (token, id) => fetch(`http:127.0.0.1:8000/definition_cambridge/${id}`,{
+    method: "GET",
+    headers:{
+        "Authorization": `Token ${token}`
+    }
+}).then(response => errorCheck(response))
+

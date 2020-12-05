@@ -1,11 +1,11 @@
 import React from 'react';
+import definitionAPI from './definitionAPI';
 
-export default function(props)
+export default function Description(props)
 {
     const synonymList = [...props.synonymsList];
     return(
         <div>
-            
             <div className="description">
                 {props.meaning}
             </div> 
@@ -22,7 +22,7 @@ export default function(props)
                 </ui>
             </div>
         </div>
-        
-        
     )
 }
+
+//TODO create a button with cambridge logo that will call the cambridge dictionary API
