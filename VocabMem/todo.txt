@@ -15,3 +15,5 @@ Make sure you handle the case where the selected word is empty.
 Refactor to accept definitions from oxford as well while not repeating yourself; use the same class as Cambridge but accepting one 
 extra argument: the name of the dictionary.
 
+Make tests for both front and backend
+
