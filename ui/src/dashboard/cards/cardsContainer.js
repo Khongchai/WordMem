@@ -1,8 +1,13 @@
 import React from 'react';
+import {useDispatch} from 'react-redux';
+import {setCurrentWord} from './../../actions/setCurrentWord';
+
 export default function CardsContainer(props)
 {
-    function handleClick(wordData)
+    const dispatch = useDispatch();
+    async function handleClick(wordData)
     {
+        dispatch(setCurrentWord(wordData.word));
         props.setMeaningAndSetSynonymList(wordData.meaning, wordData.synonyms);
         props.deleteCard(wordData.id);
     }

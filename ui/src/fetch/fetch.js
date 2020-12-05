@@ -4,6 +4,7 @@
 
 import {csrftoken} from "./cookie";
 import errorCheck from "./errorCheck";
+import {getToken} from './../Authentication/AuthState';
 
 export const register = (username, password, email) => fetch("http://127.0.0.1:8000/api/auth/register",{
     method: "POST",
@@ -66,10 +67,10 @@ export const deleteVocab = (token, id) => fetch(`http://127.0.0.1:8000/api/vocab
     }
 }).then(response => errorCheck(response))
 
-export const cambridgeDefinitionAPI = (token, id) => fetch(`http:127.0.0.1:8000/definition_cambridge/${id}`,{
+export const cambridgeDefinitionAPI = (word) => fetch(`http://127.0.0.1:8000/api/definition_cambridge/${word}`,{
     method: "GET",
     headers:{
-        "Authorization": `Token ${token}`
+        "Authorization": `Token ${getToken()}`
     }
 }).then(response => errorCheck(response))
 

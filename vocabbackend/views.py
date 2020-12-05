@@ -44,12 +44,15 @@ class VocabAPI(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-class GetDefinitionAPICambridge(viewsets.ViewSet):
+class GetDefinitionAPICambridge(generics.GenericAPIView):
 
-    def retrieve(self, request, pk):
-        word = (Vocab.objects.get(pk=pk)).word
-        list_of_definitions = get_list_of_definitions_cambridge(word)
-        return Response(list_of_definitions)
+    def get(self, request, word):
+        if (Vocab.objects.get(word__iexact=word)):
+            list_of_definitions = get_list_of_definitions_cambridge(word)
+            return Response(list_of_definitions)
+
+
+
 
     
 

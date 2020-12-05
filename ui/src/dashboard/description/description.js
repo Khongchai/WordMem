@@ -1,5 +1,5 @@
 import React from 'react';
-import definitionAPI from './definitionAPI';
+import DefinitionsFromAPI from './definitionAPI';
 
 export default function Description(props)
 {
@@ -10,7 +10,7 @@ export default function Description(props)
                 {props.meaning}
             </div> 
             <div className="synonym-list">
-                <ui>
+                <ul>
                     {synonymList.length > 0?
                      <div style={{fontStyle: "normal", fontWeight: "bold", marginBottom: "1rem"}}>Synonyms: </div>
                       : ""}
@@ -19,8 +19,9 @@ export default function Description(props)
                             {syn}
                         </li>
                     ))}
-                </ui>
+                </ul>
             </div>
+            <DefinitionsFromAPI setMeaning={props.setMeaning} />
         </div>
     )
 }

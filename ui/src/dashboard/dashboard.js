@@ -65,7 +65,7 @@ export default function Dashboard(props)
                     <Cards vocabList={mutableVocabList} setMeaning={setMeaning}  
                     filterVocab={filterVocab} setSynonymList={setSynonymList}
                     setBothVocabLists={setBothVocabLists} deleteCard={deleteCard}/>
-                    <Description meaning={meaning} synonymsList={synonymList}/>
+                    <Description meaning={meaning} setMeaning={setMeaning} synonymsList={synonymList}/>
                 </div>
             </dashboard>
             <Toast/>
