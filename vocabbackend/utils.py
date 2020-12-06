@@ -38,4 +38,7 @@ def get_list_of_definitions_cambridge(word):
     return text_array
 
 def remove_colons_and_capitalize(sentence):
-    return sentence[:-2].capitalize()
+    #in cambridge dictionary sometimes there is a succeeding colons after each definition
+    if sentence[len(sentence) - 2 ] == ":":
+        return sentence[:-2].capitalize()
+    return sentence.capitalize()

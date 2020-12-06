@@ -27,13 +27,13 @@ function LogInForm(props)
 
   async function logUserIn()
   { 
-    const ok = await loginfetch(username, password)
+    const ok = await loginfetch(username, password);
     handleRedirect(ok);
   }
   
   function handleRedirect(ok)
   {
-    let อิอิ = ok? history.push("/dashboard"):null;
+    let throwaway = ok? history.push("/dashboard"):null;
   }
   return(
     <form style={{padding: "10px"}} onSubmit={(e) => {

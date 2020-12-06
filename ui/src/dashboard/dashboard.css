@@ -155,24 +155,7 @@ dashboard
     max-width: 600px;
     
 }
-#definitions-from-API
-{
-    padding-left: var(--main-left-padding);
-    display: flex;
-    flex-direction: column;
-    max-width: 200px;
-}
 
-#definitions-from-API > img:hover
-{
-    width: 300px !important;
-}
-#definitions-from-API > img
-{
-    transition: .3s;
-    cursor: pointer;
-    clip-path:inset(0 1% 0 0);
-}
 .synonym-list
 {
     margin-top: 30px;

@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Switch} from "react-router-dom";
 import Dashboard from './dashboard/dashboard';
 import PrivateRoute from './Authentication/PrivateRoute';
 import PublicRoute from './Authentication/PublicRoute';
+import Toast from './dashboard/toast';
 
 function App()
 {
@@ -19,6 +20,7 @@ function App()
           <PublicRoute component={Login} restricted={true} exact path="/login" />
           <PrivateRoute component={Dashboard} exact path="/dashboard" />
         </Switch>
+        <Toast/>
       </Router>
 
     )

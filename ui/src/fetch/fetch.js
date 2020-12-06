@@ -3,7 +3,7 @@
 */
 
 import {csrftoken} from "./cookie";
-import errorCheck from "./errorCheck";
+import errorCheck, {errorCheckForLogin} from "./errorCheck";
 import {getToken} from './../Authentication/AuthState';
 
 export const register = (username, password, email) => fetch("http://127.0.0.1:8000/api/auth/register",{
@@ -29,7 +29,7 @@ export const login = (username, password) => fetch("http://127.0.0.1:8000/api/au
         username,
         password
     })
-}).then(response => errorCheck(response))
+}).then(response => errorCheckForLogin(response))
 
 
 export const logout = (token) => fetch("http://127.0.0.1:8000/api/auth/logout", {

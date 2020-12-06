@@ -10,19 +10,19 @@ import GuyOnComputer from '../svg/guyoncomputer';
 import {useSelector, useDispatch} from 'react-redux';
 import {addCards} from '../actions/addRemoveCards';
 import AddCardForm from './cards/addCardForm';
-import Toast from './toast';
+import {showToast} from './toast';
 
 
 export default function Dashboard(props)
 {
     //mutableVocabList can change, for example, when user filter for a word
     //whereas primary reflects the actual list the user has.
-    const immutableVocabList = useSelector(state => state.vocabList);
     const canDelete = useSelector(state => state.allowDelete);
     const [mutableVocabList, setmutableVocabList] = useState('');
     const dispatch = useDispatch();
     const [meaning, setMeaning] = useState('');
     const [synonymList, setSynonymList] = useState([]);
+
 
     async function setBothVocabLists(list)
     {
@@ -31,12 +31,39 @@ export default function Dashboard(props)
         return;
     }
 
+
     useEffect(() => {
         getVocab(getToken()).then(list => {
+
+            if (!tokenIsStillValid(list))
+            {
+                clearLoggedData();
+            }
             setBothVocabLists(list);
         })
       }, []);
-    
+
+    function tokenIsStillValid(response)
+    {
+        let valid = true;
+        let invalid = false;
+        if (response.detail)
+        {
+            var regex = new RegExp("invalid token[.]", "gi");
+            return response.detail.match(regex)? invalid: valid;
+        }
+        else
+        {
+            return valid;
+        }
+       
+    }
+    function clearLoggedData()
+    {
+        localStorage.clear();
+    }
+
+
     function filterVocab(filteredArray)
     {
         setmutableVocabList(filteredArray);
@@ -48,10 +75,17 @@ export default function Dashboard(props)
             deleteVocab(getToken(), id)
             .then(newList=> {
                 setBothVocabLists(newList);
+                showToast("Vocab deleted", "red");
             })
             
         }
-        
+    }
+    function undoDeletion()
+    {
+        //TODO
+        //save current state then pass to showToast
+        //if user click on undo button in toast, redo the deletion
+        //don't forget to send to backend
     }
 
     return (
@@ -68,8 +102,6 @@ export default function Dashboard(props)
                     <Description meaning={meaning} setMeaning={setMeaning} synonymsList={synonymList}/>
                 </div>
             </dashboard>
-            <Toast/>
-
         </div>
         
 

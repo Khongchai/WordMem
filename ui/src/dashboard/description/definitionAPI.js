@@ -7,6 +7,7 @@ import {useSelector} from 'react-redux';
 export default function DefinitionsFromAPI(props)
 {
     const selectedWord = useSelector(state => state.currentlySelectedWord);
+    const className = selectedWord? "": "disabled-grayscale";
     async function fetchDefinition(dictionary)
     {
         switch(dictionary)
@@ -43,8 +44,8 @@ export default function DefinitionsFromAPI(props)
     }
     return(
         <div id="definitions-from-API">
-            <img src={cambridgeLogo} onClick={() => fetchDefinition("cambridge")} style={{width:"100%"}}/>
-            <img src={oxfordLogo} onClick={() => fetchDefinition("oxford")} style={{width:"100%"}}/>
+            <img src={cambridgeLogo} className={className} onClick={() => fetchDefinition("cambridge")} style={{width:"100%"}}/>
+            <img src={oxfordLogo} className={className} onClick={() => fetchDefinition("oxford")} style={{width:"100%"}}/>
         </div>
     )
 }

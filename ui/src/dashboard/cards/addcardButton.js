@@ -9,9 +9,7 @@ export default function AddCardButton(props)
     function showForm()
     {
         document.getElementById("add-card-form").style.display = "flex";
-        //show form
-        //take info from form on submit
-        // call addCard()
+
     }
 
     return(
