@@ -15,3 +15,8 @@ extra argument: the name of the dictionary.
 
 Make tests for both front and backend
 
+for redo/undo
+- create a redux store that stores all actions first, maybe as far as 10 steps back
+- then create a redo
+- then create an undo
+

@@ -11,6 +11,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {addCards} from '../actions/addRemoveCards';
 import AddCardForm from './cards/addCardForm';
 import {showToast} from './toast';
+import { addToHistoryPast } from '../actions/addToHistory';
 
 
 export default function Dashboard(props)
@@ -19,13 +20,14 @@ export default function Dashboard(props)
     //whereas primary reflects the actual list the user has.
     const canDelete = useSelector(state => state.allowDelete);
     const [mutableVocabList, setmutableVocabList] = useState('');
+    const curList = useSelector(state => state.vocabList);
     const dispatch = useDispatch();
     const [meaning, setMeaning] = useState('');
     const [synonymList, setSynonymList] = useState([]);
 
-
     async function setBothVocabLists(list)
     {
+        dispatch(addToHistoryPast(curList));
         dispatch(addCards(list));
         setmutableVocabList(list);
         return;
