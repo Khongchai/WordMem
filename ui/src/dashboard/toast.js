@@ -56,6 +56,6 @@ function setTimeOutForDeletion(toast)
                         toast.className = toast.className.replace("show", ""); 
                         //always reset color
                         toast.style.background = "#F17300";
-                    }, 1000);
+                    }, 10000);
 }
 
