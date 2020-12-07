@@ -9,21 +9,28 @@ export default function(state = initialState, action)
     const {past, future} = state;
     switch(action.type)
     {
+        
         case 'ADD_TO_HISTORY_PAST':
             past.push(action.payload);
             return{
                 past,
                 future
             };
-        case 'UNDO':
+
+
+        case 'UNDO_HISTORY':
             /*
-            Return the last member of past array and add the 
-            current state before undo to future, passed in action.payload.
+            Remove last element from past and add current state to future
             */
-            let pastStateToBeReturned = past[past.length - 1];
+
             past.pop();
-            future.push(action.payload);
-            return pastStateToBeReturned;
+            if (past.length){future.push(action.payload);}
+
+            return {
+            past, future
+            };
+
+            
         default:
             return state;
     };

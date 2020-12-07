@@ -20,3 +20,7 @@ for redo/undo
 - then create a redo
 - then create an undo
 
+
+
+
+current: now redo is implemented in redux, now to reflect that in the app, import the "past[length-1]" state from redux and then set that to the current state

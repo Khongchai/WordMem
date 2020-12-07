@@ -1,7 +1,5 @@
 import React from 'react';
-import {addVocab}   from '../../fetch/fetch';
 import './cards.css';
-import {useSelector} from 'react-redux';
 
 export default function AddCardButton(props)
 {

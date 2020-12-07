@@ -13,7 +13,7 @@ import AddCardForm from './cards/addCardForm';
 import {showToast} from './toast';
 import { addToHistoryPast } from '../actions/addToHistory';
 
-
+var firstLoad = true;
 export default function Dashboard(props)
 {
     //mutableVocabList can change, for example, when user filter for a word
@@ -27,7 +27,11 @@ export default function Dashboard(props)
 
     async function setBothVocabLists(list)
     {
-        dispatch(addToHistoryPast(curList));
+        console.log(firstLoad)
+        if (!firstLoad)
+        {
+            dispatch(addToHistoryPast(curList));
+        }
         dispatch(addCards(list));
         setmutableVocabList(list);
         return;
@@ -42,6 +46,7 @@ export default function Dashboard(props)
                 clearLoggedData();
             }
             setBothVocabLists(list);
+            firstLoad = false;
         })
       }, []);
 
@@ -82,7 +87,7 @@ export default function Dashboard(props)
             
         }
     }
-    function undoDeletion()
+    function undo()
     {
         //TODO
         //save current state then pass to showToast
