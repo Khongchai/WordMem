@@ -23,4 +23,5 @@ for redo/undo
 
 
 
-current: now redo is implemented in redux, now to reflect that in the app, import the "past[length-1]" state from redux and then set that to the current state
+current: now redo is implemented in redux, now to reflect that in the app, import the "past[length-1]" state from redux 
+and then set that to the current state using the function that sets both vocab lists.

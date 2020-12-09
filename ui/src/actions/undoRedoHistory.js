@@ -1,10 +1,9 @@
-export const undo = (currentState) =>
+export const undo = () =>
 {
     //currentState will have to be added to future state
     //so that user can redo that action
     return{
-        type: "UNDO_HISTORY",
-        payload: currentState
+        type: "UNDO_HISTORY"
     }
 }
 

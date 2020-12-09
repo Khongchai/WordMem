@@ -47,11 +47,8 @@ function handleUndoRedo(ctrlPressed, zKey, yKey)
     {
         if (zKey)
         {
-            //get currentState somehow and passed into undo
-            //before calling undo, make sure you read the value of
-            //the last member of past first
-            let currentState = (store.getState()).vocabList;
-            store.dispatch(undo(currentState));
+            store.dispatch(undo());
+
             zKey = false;
         }
         if (yKey)

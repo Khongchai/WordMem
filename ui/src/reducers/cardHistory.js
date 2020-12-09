@@ -1,12 +1,13 @@
 const initialState = {
     past: [],
+    present: [],
     future: [],
 }
 
 
 export default function(state = initialState, action)
 {
-    const {past, future} = state;
+    const {past, present, future} = state;
     switch(action.type)
     {
         
@@ -14,21 +15,20 @@ export default function(state = initialState, action)
             past.push(action.payload);
             return{
                 past,
+                present,
                 future
             };
-
-
-        case 'UNDO_HISTORY':
-            /*
-            Remove last element from past and add current state to future
-            */
-
-            past.pop();
-            if (past.length){future.push(action.payload);}
-
-            return {
-            past, future
+        case 'ADD_TO_HISTORY_PRESENT':
+            return{
+                past,
+                present: action.payload,
+                future
             };
+        case 'UNDO_HISTORY':
+        /*
+        Remove last element from past and add current state to future
+        */
+        return manageUndo(past, present, future);
 
             
         default:
@@ -36,5 +36,22 @@ export default function(state = initialState, action)
     };
 };
 
+function manageUndo(past, present, future)
+{
+    let curPast = past.pop();
+
+    //Undo only if there is anything to be undone
+    if (curPast)
+    {  
+        if(curPast)
+        {
+            future.push(present);
+            present = curPast;
+        }
+    }
+    return {
+        past, present, future
+        };
+}
 
 
