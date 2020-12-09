@@ -8,7 +8,7 @@ export default function AddCardForm (props)
 {
     const [word, setWord] = useState("");
     const [meaning, setMeaning] = useState("");
-    const currList = useSelector(state => state.vocabList);
+    const currList = useSelector(state => state.cardHistory.present);
     async function handleSubmit(e)
     {
         e.preventDefault();

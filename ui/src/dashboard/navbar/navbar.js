@@ -10,7 +10,7 @@ import {useSelector} from 'react-redux';
 
 export default function Navbar()
 {
-    const vocabList = useSelector(state => state.vocabList);
+    const vocabList = useSelector(state => state.cardHistory.present);
     var history = useHistory();
     function logUserOutAndRedirect(e)
     {

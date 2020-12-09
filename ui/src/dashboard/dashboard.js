@@ -8,7 +8,6 @@ import Cards from './cards/cardSection/cardsSection';
 import Description from './description/description';
 import GuyOnComputer from '../svg/guyoncomputer';
 import {useSelector, useDispatch} from 'react-redux';
-import {addCards} from '../actions/addRemoveCards';
 import AddCardForm from './cards/addCardForm';
 import {showToast} from './toast';
 import { addToHistoryPast, addToHistoryPresent } from '../actions/addToHistory';
@@ -33,9 +32,7 @@ export default function Dashboard(props)
             dispatch(addToHistoryPast(curList));
         }
 
-        //this and dispatch(addCards(list)) do the same thing; refactor.
         dispatch(addToHistoryPresent(list));
-        dispatch(addCards(list));
         setmutableVocabList(list);
         return;
     }
