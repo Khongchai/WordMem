@@ -15,13 +15,8 @@ extra argument: the name of the dictionary.
 
 Make tests for both front and backend
 
-for redo/undo
-- create a redux store that stores all actions first, maybe as far as 10 steps back
-- then create a redo
-- then create an undo
 
-
-
-
-current: now redo is implemented in redux, now to reflect that in the app, import the "past[length-1]" state from redux 
-and then set that to the current state using the function that sets both vocab lists.
+//detect what the differences between this and previous states are.
+//and send that difference to database
+//do not send the entire state, as it can be very slow
+//send to database

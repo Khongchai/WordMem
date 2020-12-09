@@ -19,13 +19,12 @@ export async function showToast(toastMessage, optionalColor)
 
     toast.style.backgroundColor = manageColor(optionalColor);
 
-    console.log(timeouthandle);
     manageTimeout(toast);
 }
 
 function manageColor(optionalColor)
 {
-    return optionalColor? optionalColor: "##F17300";
+    return optionalColor? optionalColor: "#F17300";
 }
 
 function manageTimeout(toast)

@@ -1,9 +1,10 @@
 import {allowDelete} from "../../../actions/allowDelete";
 import {undo, redo} from "../../../actions/undoRedoHistory";
 import {store} from "../../../index";
-import {} from "../../dashboard";
-export default function detectKeyPressed()
+import detectChangedObjects from "./detectChangedObjects";
+export default function detectKeyPressed(setMutableVocabList)
 {
+    console.log(setMutableVocabList)
     //Manages all keydown
     let undoKey = {
         "z": false
@@ -12,11 +13,11 @@ export default function detectKeyPressed()
         "y": false
     }
     let ctrlPressed = false;
-    manageDownKeys(undoKey, redoKey, ctrlPressed);
+    manageDownKeys(undoKey, redoKey, ctrlPressed, setMutableVocabList);
     manageUpKeys(undoKey, redoKey, ctrlPressed);
 }
 
-function manageDownKeys(undoKey, redoKey, ctrlPressed)
+function manageDownKeys(undoKey, redoKey, ctrlPressed, setMutableVocabList)
 {
     document.addEventListener("keydown", function(e) {
         switch(e.key)
@@ -36,22 +37,34 @@ function manageDownKeys(undoKey, redoKey, ctrlPressed)
                 //other keys pressed, do nothing
                 break;
         } 
-        handleUndoRedo(ctrlPressed, undoKey.z, redoKey.y);  
+        handleUndoRedo(ctrlPressed, undoKey.z, redoKey.y, setMutableVocabList);  
         
 
     });
 }
 
-function handleUndoRedo(ctrlPressed, zKey, yKey)
+function handleUndoRedo(ctrlPressed, zKey, yKey, setMutableVocabList)
 {
     if (ctrlPressed)
     {
         if (zKey)
         {
+            let stateBeforeUndo = store.getState().cardHistory.present;
             store.dispatch(undo());
+            let stateAfterUndo = store.getState().cardHistory.present;
             zKey = false;
+            
+            //detect what the differences between this and previous states are.
+            //and send that difference to database
+            //do not send the entire state, as it can be very slow
             //send to database
-            //reflect that in the application ui
+
+            let backendSaysOK = detectChangedObjects(stateBeforeUndo, stateAfterUndo);
+            //TODO, authorize this only after backend says ok
+            if (backendSaysOK)
+            {
+                setMutableVocabList(stateAfterUndo);
+            }
         }
         if (yKey)
         {

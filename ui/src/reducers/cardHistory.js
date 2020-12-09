@@ -1,3 +1,4 @@
+import {showToast} from "../dashboard/toast";
 const initialState = {
     past: [],
     present: [],
@@ -41,14 +42,14 @@ function manageUndo(past, present, future)
     let curPast = past.pop();
 
     //Undo only if there is anything to be undone
-    if (curPast)
-    {  
-        if(curPast)
-        {
-            future.push(present);
-            present = curPast;
-        }
+
+    if(curPast)
+    {
+        future.push(present);
+        present = curPast;
+        showToast("undo");
     }
+
     return {
         past, present, future
         };

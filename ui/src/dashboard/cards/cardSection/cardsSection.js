@@ -8,13 +8,18 @@ import CardsContainer from '../cardsContainer';
 import detectKeyPressed from './detectKeyPressed';
 
 
-detectKeyPressed();
+
 
 export default function CardSection(props)
 {
     var mutableVocabList = Array.from(props.vocabList);
     const canDelete = useSelector(state => state.allowDelete);
-    const immutableVocabList = useSelector(state => state.vocabList);
+    const immutableVocabList = useSelector(state => state.cardHistory.present);
+
+    useEffect(() => {
+        detectKeyPressed(props.setMutableVocabList);
+      }, []);
+
     function setMeaningAndSetSynonymList(meaning, synonymIDs)
     {
         if (!canDelete)

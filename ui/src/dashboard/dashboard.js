@@ -17,7 +17,7 @@ export default function Dashboard(props)
     //mutableVocabList can change, for example, when user filter for a word
     //whereas primary reflects the actual list the user has.
     const canDelete = useSelector(state => state.allowDelete);
-    const [mutableVocabList, setmutableVocabList] = useState('');
+    const [mutableVocabList, setMutableVocabList] = useState('');
     
     const curList = useSelector(state => state.cardHistory.present);
     const dispatch = useDispatch();
@@ -31,8 +31,8 @@ export default function Dashboard(props)
             dispatch(addToHistoryPast(curList));
         }
 
-        dispatch(addToHistoryPresent(list));
-        setmutableVocabList(list);
+        let listForUI = (dispatch(addToHistoryPresent(list))).payload;
+        setMutableVocabList(listForUI);
         return;
     }
 
@@ -73,7 +73,7 @@ export default function Dashboard(props)
 
     function filterVocab(filteredArray)
     {
-        setmutableVocabList(filteredArray);
+        setMutableVocabList(filteredArray);
     }
     async function deleteCard(id)
     {
@@ -98,7 +98,7 @@ export default function Dashboard(props)
                 <div className="dashboardMainWindow">
                     <Cards vocabList={mutableVocabList} setMeaning={setMeaning}  
                     filterVocab={filterVocab} setSynonymList={setSynonymList}
-                    setBothVocabLists={setBothVocabLists} deleteCard={deleteCard}/>
+                    setBothVocabLists={setBothVocabLists} setMutableVocabList={setMutableVocabList} deleteCard={deleteCard}/>
                     <Description setBothVocabLists={setBothVocabLists} meaning={meaning} setMeaning={setMeaning} synonymsList={synonymList}/>
                 </div>
             </dashboard>
