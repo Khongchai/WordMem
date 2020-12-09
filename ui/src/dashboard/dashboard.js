@@ -1,4 +1,3 @@
-import {} from '../fetch/fetch';
 import './dashboard.css';
 import Navbar from './navbar/navbar';
 import {getVocab, deleteVocab} from '../fetch/fetch';
@@ -88,13 +87,6 @@ export default function Dashboard(props)
             
         }
     }
-    function undo()
-    {
-        //TODO
-        //save current state then pass to showToast
-        //if user click on undo button in toast, redo the deletion
-        //don't forget to send to backend
-    }
 
     return (
         <div>
@@ -107,7 +99,7 @@ export default function Dashboard(props)
                     <Cards vocabList={mutableVocabList} setMeaning={setMeaning}  
                     filterVocab={filterVocab} setSynonymList={setSynonymList}
                     setBothVocabLists={setBothVocabLists} deleteCard={deleteCard}/>
-                    <Description meaning={meaning} setMeaning={setMeaning} synonymsList={synonymList}/>
+                    <Description setBothVocabLists={setBothVocabLists} meaning={meaning} setMeaning={setMeaning} synonymsList={synonymList}/>
                 </div>
             </dashboard>
         </div>

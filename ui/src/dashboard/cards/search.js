@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 export default function Search(props)
 {
     const [searchbox, setSearchBox] = useState("");
-    const immutableVocabList = useSelector(state => state.vocabList);
+    const immutableVocabList = useSelector(state => state.cardHistory.present);
 
     function setSearchValueAndFilter(filterValue)
     {

@@ -1,6 +1,7 @@
 import {allowDelete} from "../../../actions/allowDelete";
 import {undo, redo} from "../../../actions/undoRedoHistory";
 import {store} from "../../../index";
+import {} from "../../dashboard";
 export default function detectKeyPressed()
 {
     //Manages all keydown
@@ -48,8 +49,9 @@ function handleUndoRedo(ctrlPressed, zKey, yKey)
         if (zKey)
         {
             store.dispatch(undo());
-
             zKey = false;
+            //send to database
+            //reflect that in the application ui
         }
         if (yKey)
         {
