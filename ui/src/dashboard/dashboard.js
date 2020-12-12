@@ -33,9 +33,9 @@ export default function Dashboard(props)
 
         let listForUI = (dispatch(addToHistoryPresent(list))).payload;
         setMutableVocabList(listForUI);
+
         return;
     }
-
 
     useEffect(() => {
         getVocab(getToken()).then(list => {

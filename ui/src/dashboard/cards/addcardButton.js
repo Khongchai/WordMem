@@ -7,7 +7,6 @@ export default function AddCardButton(props)
     function showForm()
     {
         document.getElementById("add-card-form").style.display = "flex";
-
     }
 
     return(

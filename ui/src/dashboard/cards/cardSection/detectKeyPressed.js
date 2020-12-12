@@ -2,6 +2,8 @@ import {allowDelete} from "../../../actions/allowDelete";
 import {undo, redo} from "../../../actions/undoRedoHistory";
 import {store} from "../../../index";
 import detectChangedObjects from "./detectChangedObjects";
+
+
 export default function detectKeyPressed(setMutableVocabList)
 {
     console.log(setMutableVocabList)
@@ -49,17 +51,13 @@ function handleUndoRedo(ctrlPressed, zKey, yKey, setMutableVocabList)
     {
         if (zKey)
         {
+            zKey = false;
             let stateBeforeUndo = store.getState().cardHistory.present;
             store.dispatch(undo());
             let stateAfterUndo = store.getState().cardHistory.present;
-            zKey = false;
-            
-            //detect what the differences between this and previous states are.
-            //and send that difference to database
-            //do not send the entire state, as it can be very slow
-            //send to database
+            let referenceKeys = store.getState().listOfkeys;
 
-            let backendSaysOK = detectChangedObjects(stateBeforeUndo, stateAfterUndo);
+            let backendSaysOK = detectChangedObjects(stateBeforeUndo, stateAfterUndo, referenceKeys);
             //TODO, authorize this only after backend says ok
             if (backendSaysOK)
             {
