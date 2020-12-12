@@ -4,7 +4,7 @@ import {store} from "../../../index";
 import detectChangedObjects from "./detectChangedObjects";
 
 
-export default function detectKeyPressed(setMutableVocabList)
+export default function detectKeyPressed(setMutableVocabList: any)
 {
     console.log(setMutableVocabList)
     //Manages all keydown
@@ -19,7 +19,7 @@ export default function detectKeyPressed(setMutableVocabList)
     manageUpKeys(undoKey, redoKey, ctrlPressed);
 }
 
-function manageDownKeys(undoKey, redoKey, ctrlPressed, setMutableVocabList)
+function manageDownKeys(undoKey: { z: boolean; }, redoKey: {y: boolean; }, ctrlPressed: boolean, setMutableVocabList: any)
 {
     document.addEventListener("keydown", function(e) {
         switch(e.key)
@@ -45,7 +45,7 @@ function manageDownKeys(undoKey, redoKey, ctrlPressed, setMutableVocabList)
     });
 }
 
-function handleUndoRedo(ctrlPressed, zKey, yKey, setMutableVocabList)
+function handleUndoRedo(ctrlPressed: boolean, zKey: boolean, yKey: boolean, setMutableVocabList: any)
 {
     if (ctrlPressed)
     {
@@ -72,7 +72,7 @@ function handleUndoRedo(ctrlPressed, zKey, yKey, setMutableVocabList)
     }
 }
 
-function manageUpKeys(undoKey, redoKey, ctrlPressed)
+function manageUpKeys(undoKey: { z: any; }, redoKey: { y: any; }, ctrlPressed: boolean)
 {
     document.addEventListener("keyup", function(e)
     {
@@ -97,22 +97,23 @@ function manageUpKeys(undoKey, redoKey, ctrlPressed)
 }
 
 
-function addORremoveDeleteIndicator(action)
+function addORremoveDeleteIndicator(action: string)
 {
     let cards = document.getElementsByClassName("card");
+    let listLength = cards.length;
     if (action === "ADD")
     {
-        for (let card of cards)
+        for (let i = 0; i< listLength; i++)
         {
-            card.classList.add("delete-indicator");
+            cards[i].classList.add("delete-indicator");
         }
     }
     else
     {
-        for (let card of cards)
+        for (let i = 0; i< listLength; i++)
         {
-            card.classList.remove("delete-indicator");
-        } 
+            cards[i].classList.remove("delete-indicator");
+        }
     }
 
 }

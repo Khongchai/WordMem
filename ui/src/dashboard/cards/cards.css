@@ -73,11 +73,11 @@
     margin-left: -222px;
 }
 #cards-container::-webkit-scrollbar{
-    display: none;
+    background: transparent;
 
 }
 #cards-container::-webkit-scrollbar-thumb{
-    display: none;
+    background: transparent;
 
 }
 .search-box
