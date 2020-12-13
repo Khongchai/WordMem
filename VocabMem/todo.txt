@@ -15,8 +15,10 @@ extra argument: the name of the dictionary.
 
 Make tests for both front and backend
 
+update synonyms count when new card is added, somehow
 
-//detect what the differences between this and previous states are.
-//and send that difference to database
-//do not send the entire state, as it can be very slow
-//send to database
+        //The undone object MUST also have the new ID from backend.
+        /*
+            for ADD, write another backend serializer that returns an entire list for POST requests instead of just 
+            the newly added card.
+        */

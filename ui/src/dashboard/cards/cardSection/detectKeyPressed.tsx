@@ -45,7 +45,7 @@ function manageDownKeys(undoKey: { z: boolean; }, redoKey: {y: boolean; }, ctrlP
     });
 }
 
-function handleUndoRedo(ctrlPressed: boolean, zKey: boolean, yKey: boolean, setMutableVocabList: any)
+async function handleUndoRedo(ctrlPressed: boolean, zKey: boolean, yKey: boolean, setMutableVocabList: any)
 {
     if (ctrlPressed)
     {
@@ -57,12 +57,14 @@ function handleUndoRedo(ctrlPressed: boolean, zKey: boolean, yKey: boolean, setM
             let stateAfterUndo = store.getState().cardHistory.present;
             let referenceKeys = store.getState().listOfkeys;
 
-            let backendSaysOK = detectChangedObjects(stateBeforeUndo, stateAfterUndo, referenceKeys);
-            //TODO, authorize this only after backend says ok
-            if (backendSaysOK)
+            let fromBackend: any = await detectChangedObjects(stateBeforeUndo, stateAfterUndo, referenceKeys);
+
+            //fromBackend returns two types of objects, one from DELETE, and one from ADD
+            if (typeof fromBackend === "object")
             {
-                setMutableVocabList(stateAfterUndo);
+                setMutableVocabList(fromBackend);
             }
+
         }
         if (yKey)
         {
