@@ -33,7 +33,10 @@ class VocabAPI(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         new_vocab = serializer.save()
 
-        return Response(VocabSerializer(new_vocab).data)
+        queryset = self.request.user.memorizedWords.all()
+        serializer = self.get_serializer(queryset, many=True)
+
+        return Response(serializer.data)
 
     def destroy(self, request, pk):
         vocab_to_be_deleted = Vocab.objects.get(pk=pk)

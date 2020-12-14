@@ -26,10 +26,15 @@ export default function(state = initialState, action)
                 future
             };
         case 'UNDO_HISTORY':
-        /*
-        Remove last element from past and add current state to future
-        */
-        return manageUndo(past, present, future);
+            /*
+            Remove last element from past and add current state to future
+            */
+            return manageQueue(past, present, future, "UNDO");
+        case 'REDO_HISTORY':
+            /*
+            Remove last element from future and add current state to future
+            */
+            return manageQueue(future, present, past, "REDO");
 
             
         default:
@@ -37,22 +42,34 @@ export default function(state = initialState, action)
     };
 };
 
-function manageUndo(past, present, future)
+function manageQueue(elemToPop, present, elemToPush, flag)
 {
-    let curPast = past.pop();
+    let poppedElemForPresent = elemToPop.pop();
 
-    //Undo only if there is anything to be undone
-
-    if(curPast)
+    //Undo/redo only if there is anything to be undone
+    if(poppedElemForPresent)
     {
-        future.push(present);
-        present = curPast;
-        showToast("undo");
+        elemToPush.push(present);
+        present = poppedElemForPresent;
+        flag === "UNDO"? showToast("undo"): showToast("redo");
     }
 
-    return {
-        past, present, future
-        };
+    if (flag === "UNDO")
+    {
+        return {
+            past: elemToPop,
+            present,
+            future: elemToPush
+        }
+    }
+    else
+    {
+        return{
+            past: elemToPush,
+            present,
+            future:elemToPush
+        }
+    }
 }
 
 

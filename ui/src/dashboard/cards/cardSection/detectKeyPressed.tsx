@@ -49,18 +49,17 @@ async function handleUndoRedo(ctrlPressed: boolean, zKey: boolean, yKey: boolean
 {
     if (ctrlPressed)
     {
+        //Maybe get rid of duplicate between these two and combine some similar functionalities.
         if (zKey)
         {
             zKey = false;
             let stateBeforeUndo = store.getState().cardHistory.present;
             store.dispatch(undo());
             let stateAfterUndo = store.getState().cardHistory.present;
-            let referenceKeys = store.getState().listOfkeys;
 
-            let fromBackend: any = await detectChangedObjects(stateBeforeUndo, stateAfterUndo, referenceKeys);
+            let fromBackend: any = await detectChangedObjects(stateBeforeUndo, stateAfterUndo);
 
-            //fromBackend returns two types of objects, one from DELETE, and one from ADD
-            if (typeof fromBackend === "object")
+            if (fromBackend)
             {
                 setMutableVocabList(fromBackend);
             }
@@ -68,8 +67,19 @@ async function handleUndoRedo(ctrlPressed: boolean, zKey: boolean, yKey: boolean
         }
         if (yKey)
         {
-            //perform redo
             yKey = false;
+            let stateBeforeRedo = store.getState().cardHistory.present;
+            store.dispatch(redo());
+            let stateAfterRedo = store.getState().cardHistory.present;
+            
+            let fromBackend: any = await detectChangedObjects(stateBeforeRedo, stateAfterRedo);
+
+            if (fromBackend)
+            {
+                console.log(fromBackend)
+                setMutableVocabList(fromBackend);
+            }
+
         }
     }
 }

@@ -1,12 +1,12 @@
 import {deleteVocab, addVocab} from '../../../fetch/fetch';
 import {getToken} from '../../../Authentication/AuthState';
 
-export default async function detectChangedObjects(stateBeforeChange, stateAfterChange, refKeys)
+export default async function detectChangedObjects(stateBeforeChange, stateAfterChange)
 {
 
     if (stateBeforeChange.length === stateAfterChange.length)
     {
-        //check for edits here
+        //check for edits here, return false for now
         return false;
     }
     if (stateBeforeChange.length > stateAfterChange.length)
@@ -32,11 +32,6 @@ async function sendFetchtoDatabase(longerArray, shorterArray, flag)
 
         if(IDofItemInLongerArr !== IDofItemInShorterArr)
         {
-            //The undone object MUST also have the new ID from backend.
-            /*
-                for ADD, write another backend serializer that returns an entire list for POST requests instead of just 
-                the newly added card.
-            */
             if (flag === "DELETE")
             {
                 let itemToBeRemoveID = longerArray[i].id;
@@ -46,20 +41,12 @@ async function sendFetchtoDatabase(longerArray, shorterArray, flag)
             }
             else if (flag === "ADD")
             {
-                //TODO
                 let cardToBeAdded = longerArray[i];
-                let addedCard = await addVocab(getToken(), cardToBeAdded)
-                .then(obj => obj);
-                return {"card": addedCard, "index": i};
+                return await addVocab(getToken(), cardToBeAdded)
+                .then(listofObj => listofObj);
             }   
 
         }  
         
     }
 }
-
-function handleAdd()
-{
-
-}
-

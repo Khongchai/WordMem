@@ -48,9 +48,8 @@ export default function AddCardForm (props)
     {
         let token = getToken();
         addVocab(token, newCard)
-        .then(newCardData => {
-            let updatedCardList = [...currList, newCardData];
-            setVocabAndAddAnimation(updatedCardList);
+        .then(newCardList => {
+            setVocabAndAddAnimation(newCardList);
         });
     }
     async function setVocabAndAddAnimation(newList)
