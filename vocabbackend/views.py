@@ -16,6 +16,7 @@ from rest_framework.decorators import api_view
 class VocabAPI(viewsets.ModelViewSet):
     serializer_class = VocabSerializer
     permission_classes = [IsAuthenticated,]
+    lookup_field = "word"
 
     def list(self, request):
         queryset = self.request.user.memorizedWords.all()
@@ -38,8 +39,9 @@ class VocabAPI(viewsets.ModelViewSet):
 
         return Response(serializer.data)
 
-    def destroy(self, request, pk):
-        vocab_to_be_deleted = Vocab.objects.get(pk=pk)
+    def destroy(self, request, word):
+        
+        vocab_to_be_deleted = Vocab.objects.get(word__iexact=word)
         vocab_to_be_deleted.delete()
         
         queryset = self.request.user.memorizedWords.all()

@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {addVocab} from '../../fetch/fetch';
 import {getToken} from '../../Authentication/AuthState';
 import {showToast} from '../toast';
+import {clearFuture} from './../../actions/addToHistory';
 
 export default function AddCardForm (props)
 {
     const [word, setWord] = useState("");
     const [meaning, setMeaning] = useState("");
+    const dispatch = useDispatch();
     const currList = useSelector(state => state.cardHistory.present);
     async function handleSubmit(e)
     {
@@ -24,6 +26,7 @@ export default function AddCardForm (props)
         {
             showToast("New word added successfully");
         }
+        dispatch(clearFuture());
 
         
     }

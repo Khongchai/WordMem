@@ -15,10 +15,6 @@ extra argument: the name of the dictionary.
 
 Make tests for both front and backend
 
-update synonyms count when new card is added, somehow
+Notify duplicated words
 
-        //The undone object MUST also have the new ID from backend.
-        /*
-            for ADD, write another backend serializer that returns an entire list for POST requests instead of just 
-            the newly added card.
-        */
+Deal with latency issue where frontend does not wait for backend's reply when redo/undo resulting in empty list

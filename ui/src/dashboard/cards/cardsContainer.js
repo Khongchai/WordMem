@@ -1,5 +1,6 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
+import { clearFuture } from '../../actions/addToHistory';
 import {setCurrentWord} from '../../actions/setCurrentWord';
 
 
@@ -12,7 +13,9 @@ export default function CardsContainer(props)
     {
         dispatch(setCurrentWord(wordData.word));
         props.setMeaningAndSetSynonymList(wordData.meaning, wordData.synonyms);
-        props.deleteCard(wordData.id);
+        props.deleteCard(wordData.word);
+        dispatch(clearFuture());
+        
     }
     return(
         <div id="cards-container">

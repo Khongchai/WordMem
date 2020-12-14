@@ -14,6 +14,13 @@ export const addToHistoryPresent = (curState) =>
     }
 }
 
+export const clearFuture = () =>
+{
+    return{
+        type: "CLEAR_FUTURE"
+    }
+}
+
 
 
 

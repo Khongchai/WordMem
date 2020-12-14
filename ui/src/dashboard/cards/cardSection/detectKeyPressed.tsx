@@ -50,6 +50,7 @@ async function handleUndoRedo(ctrlPressed: boolean, zKey: boolean, yKey: boolean
     if (ctrlPressed)
     {
         //Maybe get rid of duplicate between these two and combine some similar functionalities.
+        //clear future when user do something else
         if (zKey)
         {
             zKey = false;

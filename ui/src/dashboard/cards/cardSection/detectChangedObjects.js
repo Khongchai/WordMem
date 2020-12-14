@@ -34,8 +34,8 @@ async function sendFetchtoDatabase(longerArray, shorterArray, flag)
         {
             if (flag === "DELETE")
             {
-                let itemToBeRemoveID = longerArray[i].id;
-                return await deleteVocab(getToken(), itemToBeRemoveID)
+                let wordToBeRemove = longerArray[i].word;
+                return await deleteVocab(getToken(), wordToBeRemove)
                 .then(listofObj => listofObj);
                
             }

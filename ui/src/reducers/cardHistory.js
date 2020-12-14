@@ -27,21 +27,26 @@ export default function(state = initialState, action)
             };
         case 'UNDO_HISTORY':
             /*
-            Remove last element from past and add current state to future
+                Remove last element from past and add current state to future
             */
             return manageQueue(past, present, future, "UNDO");
         case 'REDO_HISTORY':
             /*
-            Remove last element from future and add current state to future
+                Remove last element from future and add current state to future
             */
             return manageQueue(future, present, past, "REDO");
+        case 'CLEAR_FUTURE':
+            /*
+                Sever the pointer to future and discard when user perform new actions.
+            */
+            return {past, present, future: []}
 
             
         default:
             return state;
     };
 };
-
+//TODO limit history length to only ten memebers
 function manageQueue(elemToPop, present, elemToPush, flag)
 {
     let poppedElemForPresent = elemToPop.pop();
@@ -67,7 +72,7 @@ function manageQueue(elemToPop, present, elemToPush, flag)
         return{
             past: elemToPush,
             present,
-            future:elemToPush
+            future:elemToPop
         }
     }
 }

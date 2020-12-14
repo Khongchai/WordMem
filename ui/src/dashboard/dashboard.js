@@ -75,11 +75,11 @@ export default function Dashboard(props)
     {
         setMutableVocabList(filteredArray);
     }
-    async function deleteCard(id)
+    async function deleteCard(word)
     {
         if (canDelete)
         {
-            deleteVocab(getToken(), id)
+            deleteVocab(getToken(), word)
             .then(newList=> {
                 setBothVocabLists(newList);
                 showToast("Vocab deleted", "red");
