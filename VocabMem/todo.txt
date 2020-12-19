@@ -17,4 +17,4 @@ Make tests for both front and backend
 
 Notify duplicated words
 
-Deal with latency issue where frontend does not wait for backend's reply when redo/undo resulting in empty list
+oxford dictionary webscrape
