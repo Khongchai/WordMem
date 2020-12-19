@@ -2,6 +2,7 @@ import {allowDelete} from "../../../actions/allowDelete";
 import {undo, redo} from "../../../actions/undoRedoHistory";
 import {store} from "../../../index";
 import detectChangedObjects from "./detectChangedObjects";
+import {showToast} from "../../toast";
 
 
 export default function detectKeyPressed(setMutableVocabList: any)
@@ -44,43 +45,48 @@ function manageDownKeys(undoKey: { z: boolean; }, redoKey: {y: boolean; }, ctrlP
 
     });
 }
+function addORremoveDeleteIndicator(action: string)
+{
+    let cards = document.getElementsByClassName("card");
+    let listLength = cards.length;
+    if (action === "ADD")
+    {
+        for (let i = 0; i< listLength; i++)
+        {
+            cards[i].classList.add("delete-indicator");
+        }
+    }
+    else
+    {
+        for (let i = 0; i< listLength; i++)
+        {
+            cards[i].classList.remove("delete-indicator");
+        }
+    }
+}
 
 async function handleUndoRedo(ctrlPressed: boolean, zKey: boolean, yKey: boolean, setMutableVocabList: any)
 {
     if (ctrlPressed)
     {
-        //Maybe get rid of duplicate between these two and combine some similar functionalities.
-        //clear future when user do something else
+        let stateBeforeUndoORRedo: any = store.getState().cardHistory.present;
         if (zKey)
         {
             zKey = false;
-            let stateBeforeUndo = store.getState().cardHistory.present;
-            store.dispatch(undo());
-            let stateAfterUndo = store.getState().cardHistory.present;
-
-            let fromBackend: any = await detectChangedObjects(stateBeforeUndo, stateAfterUndo);
-
-            if (fromBackend)
-            {
-                setMutableVocabList(fromBackend);
-            }
-
+            await store.dispatch(undo());
         }
         if (yKey)
         {
             yKey = false;
-            let stateBeforeRedo = store.getState().cardHistory.present;
-            store.dispatch(redo());
-            let stateAfterRedo = store.getState().cardHistory.present;
-            
-            let fromBackend: any = await detectChangedObjects(stateBeforeRedo, stateAfterRedo);
+            await store.dispatch(redo());
+        }
+        let StateAfterUndoORRedo: any = store.getState().cardHistory.present;
 
-            if (fromBackend)
-            {
-                console.log(fromBackend)
-                setMutableVocabList(fromBackend);
-            }
+        let fromBackend: any = await detectChangedObjects(stateBeforeUndoORRedo, StateAfterUndoORRedo);
 
+        if (fromBackend)
+        {
+            setMutableVocabList(fromBackend);
         }
     }
 }
@@ -110,23 +116,4 @@ function manageUpKeys(undoKey: { z: any; }, redoKey: { y: any; }, ctrlPressed: b
 }
 
 
-function addORremoveDeleteIndicator(action: string)
-{
-    let cards = document.getElementsByClassName("card");
-    let listLength = cards.length;
-    if (action === "ADD")
-    {
-        for (let i = 0; i< listLength; i++)
-        {
-            cards[i].classList.add("delete-indicator");
-        }
-    }
-    else
-    {
-        for (let i = 0; i< listLength; i++)
-        {
-            cards[i].classList.remove("delete-indicator");
-        }
-    }
 
-}
