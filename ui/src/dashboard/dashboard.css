@@ -95,10 +95,12 @@ svg
     background-color: var(--accent-color);
     display: flex;
 }
-.dashboardMainWindow
+#dashboard-main-window
 {
     height: 100%;
     width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
     order: 2;
     background-color: var(--primary-color);
 }

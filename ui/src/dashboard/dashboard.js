@@ -95,7 +95,7 @@ export default function Dashboard(props)
             <dashboard>
                 <Navbar/>
                 <placeholder className="navbar-placeholder"></placeholder>
-                <div className="dashboardMainWindow">
+                <div id="dashboard-main-window">
                     <Cards vocabList={mutableVocabList} setMeaning={setMeaning}  
                     filterVocab={filterVocab} setSynonymList={setSynonymList}
                     setBothVocabLists={setBothVocabLists} setMutableVocabList={setMutableVocabList} deleteCard={deleteCard}/>

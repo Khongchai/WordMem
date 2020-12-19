@@ -33,7 +33,7 @@ export default function Search(props)
         props.filterVocab(newCardList); 
     }
     return(
-        <input className="search-box" placeholder="Search" 
+        <input className="search-box" placeholder="Search" id="search-box"
         value={searchbox} onChange={(e) => (setSearchValueAndFilter(e.target.value))}/>
     )
 }
