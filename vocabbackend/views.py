@@ -9,7 +9,7 @@ from django.urls import reverse
 from rest_framework import generics
 from rest_framework import viewsets, permissions
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .utils import get_syn_id, get_list_of_definitions_cambridge
+from .utils import get_syn_id, get_list_of_definitions_cambridge, get_list_of_definitions_oxford
 from rest_framework.decorators import api_view
 
 
@@ -52,12 +52,19 @@ class VocabAPI(viewsets.ModelViewSet):
 class GetDefinitionAPICambridge(generics.GenericAPIView):
 
     def get(self, request, word):
+        #Instead of checking of word exists here, check instead if word exists in the respective dictionary
+        #Find out what each dictionary returns if the word does not exist in the dictionary
         if (Vocab.objects.get(word__iexact=word)):
             list_of_definitions = get_list_of_definitions_cambridge(word)
             return Response(list_of_definitions)
 
 
+class GetDefinitionAPIOxford(generics.GenericAPIView):
 
+    def get(self, request, word):
+        list_of_definitions = get_list_oof_definitions_oxford(word)
+        return Response(list_of_definitions)
+            
 
     
 
