@@ -9,7 +9,7 @@ from django.urls import reverse
 from rest_framework import generics
 from rest_framework import viewsets, permissions
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .utils import get_syn_id, get_list_of_definitions_cambridge, get_list_of_definitions_oxford
+from .utils import get_syn_id, get_list_of_definitions
 from rest_framework.decorators import api_view
 
 
@@ -41,7 +41,7 @@ class VocabAPI(viewsets.ModelViewSet):
 
     def destroy(self, request, word):
         
-        vocab_to_be_deleted = Vocab.objects.get(word__iexact=word)
+        vocab_to_be_deleted = Vocab.objects.get(word__iexact=word, owner=self.request.user)
         vocab_to_be_deleted.delete()
         
         queryset = self.request.user.memorizedWords.all()
@@ -52,29 +52,18 @@ class VocabAPI(viewsets.ModelViewSet):
 class GetDefinitionAPICambridge(generics.GenericAPIView):
 
     def get(self, request, word):
-        #Instead of checking of word exists here, check instead if word exists in the respective dictionary
-        #Find out what each dictionary returns if the word does not exist in the dictionary
-        if (Vocab.objects.get(word__iexact=word)):
-            list_of_definitions = get_list_of_definitions_cambridge(word)
-            return Response(list_of_definitions)
+        #When empty, returns empty array; show error in frontend.
+        list_of_definitions = get_list_of_definitions(word, "cambridge")
+        return Response(list_of_definitions)
 
 
 class GetDefinitionAPIOxford(generics.GenericAPIView):
 
     def get(self, request, word):
-        list_of_definitions = get_list_oof_definitions_oxford(word)
+        #When empty, returns empty array; show error in frontend.
+        list_of_definitions = get_list_of_definitions(word, "oxford")
         return Response(list_of_definitions)
             
-
-    
-
-
-"""
-@api_view(['GET'])
-def get_definitions(request, word):
-    definition_list = get_list_of_definitions(word)
-    return Response(definition_list)
-"""
 
 
 

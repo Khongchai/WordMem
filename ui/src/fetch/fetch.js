@@ -74,3 +74,9 @@ export const cambridgeDefinitionAPI = (word) => fetch(`http://127.0.0.1:8000/api
     }
 }).then(response => errorCheck(response))
 
+export const oxfordDefinitionAPI = (word) => fetch(`http://127.0.0.1:8000/api/definition_oxford/${word}`,{
+    method: "GET",
+    headers:{
+        "Authorization": `Token ${getToken()}`
+    }
+}).then(response => errorCheck(response))

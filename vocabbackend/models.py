@@ -10,7 +10,7 @@ class User(AbstractUser):
 
 
 class Vocab(models.Model):
-    word = models.CharField(max_length=45, unique=True)
+    word = models.CharField(max_length=45)
     owner = models.ForeignKey(User, on_delete=models.CASCADE,  related_name="memorizedWords")
     memorizedOn = models.DateField(auto_now_add=True, null=True, blank=True)
     meaning = models.TextField()

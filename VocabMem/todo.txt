@@ -2,19 +2,10 @@ link each synonym in the synonym lists to card
 
 refactor auth to cookies
 
-Add deletion animation
-
 ability to redo deletion with countdown
 
 paginator for more than 10 cards
 
 profile pic
 
-Refactor to accept definitions from oxford as well while not repeating yourself; use the same class as Cambridge but accepting one 
-extra argument: the name of the dictionary.
-
 Make tests for both front and backend
-
-Notify duplicated words
-
-oxford dictionary webscrape
