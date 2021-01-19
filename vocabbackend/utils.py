@@ -37,6 +37,9 @@ def get_list_of_definitions_cambridge(word):
         text_array.append(remove_colons_and_capitalize(html.text))
     return text_array
 
+def get_list_of_definitions_oxford(word):
+    pass
+
 def remove_colons_and_capitalize(sentence):
     #in cambridge dictionary sometimes there is a succeeding colons after each definition
     if sentence[len(sentence) - 2 ] == ":":

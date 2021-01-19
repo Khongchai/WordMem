@@ -6,9 +6,7 @@ import Searchbox from '../search';
 import {useSelector} from 'react-redux';
 import CardsContainer from '../cardsContainer';
 import detectKeyPressed from './detectKeyPressed';
-
-
-
+import hideSearchBoxOnScroll from "./hideSearchOnScroll";
 
 export default function CardSection(props)
 {
@@ -18,6 +16,7 @@ export default function CardSection(props)
 
     useEffect(() => {
         detectKeyPressed(props.setMutableVocabList);
+        hideSearchBoxOnScroll();
       }, []);
 
     function setMeaningAndSetSynonymList(meaning, synonymIDs)
@@ -28,7 +27,6 @@ export default function CardSection(props)
             props.setSynonymList(getSynonymListFromIDs(synonymIDs));
         }
     }
-
     function getSynonymListFromIDs(IDs)
     {
         let synonymList = IDs.map(id => getSynonymFromID(id));
