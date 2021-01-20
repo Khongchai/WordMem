@@ -152,7 +152,7 @@ dashboard
 
 #profile-pic
 {
-
+    cursor: pointer;
     border-radius: 50%;
     background-color: grey;
 }
