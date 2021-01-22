@@ -5,8 +5,6 @@ from knox.models import AuthToken
 from .serializers import *
 from knox.auth import TokenAuthentication
 
-#Register API
-#TODO log the user in after registration
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 

@@ -1,0 +1,15 @@
+link each synonym in the synonym lists to card
+
+refactor auth to cookies
+
+ability to redo deletion with countdown
+
+paginator for more than 10 cards
+
+profile pic
+ - After that an option to customize profile information
+ Steps: create upload functionality, then take care of returning the picture in the backend and then fetch in the frontend
+//To continue => set background image => load background image after login
+
+Make tests for both front and backend
+

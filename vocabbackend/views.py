@@ -64,8 +64,19 @@ class GetDefinitionAPIOxford(generics.GenericAPIView):
         list_of_definitions = get_list_of_definitions(word, "oxford")
         return Response(list_of_definitions)
             
+class ManageUserProfilePic(generics.GenericAPIView):
 
+    permission_classes = [IsAuthenticated,]
 
+    def post(self, request, *args, **kwargs):
+        user = self.request.user
+        if not user.prof_img:
+            user.prof_img = request.data["newProfImg"]
+            user.save()
+            #user.prof_img = request.data["profImg"]
+        return Response(status=200)
+
+    #create a get function to retrieve image
 
 
 

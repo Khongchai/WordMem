@@ -1,0 +1,23 @@
+#profile-pic:hover::after
+{
+    content: "Upload picture";
+    width: 100%;
+    pointer-events: none;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    animation: fadein .3s;
+
+}
+
+@keyframes fadein
+{
+    0%
+    {
+        opacity: 0;
+    }
+    100%
+    {
+        opacity: 1;
+    }
+}

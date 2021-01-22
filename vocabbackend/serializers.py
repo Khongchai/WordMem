@@ -1,6 +1,9 @@
 from rest_framework import serializers
 from .models import Vocab
 from .utils import get_syn_id
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class VocabSerializer(serializers.ModelSerializer):
     class Meta:

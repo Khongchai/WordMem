@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import '../dashboard.css';
+import './navbar.css';
 import Book from '../../svg/book';
-import {logout} from '../../fetch/fetch';
+import {logout, uploadNewProfilePic} from '../../fetch/fetch';
 import {getToken, setLocalStorageAuthState, getCurrentUser} from '../../Authentication/AuthState';
 import {useHistory} from 'react-router-dom';
 import {useSelector} from 'react-redux';
@@ -71,25 +72,36 @@ export default function Navbar()
 function ProfilePic(props)
 {
 
-    const [profImg, setProfImg] = useState(null);
-
-    //use this boolena state to decide whether to run the useEffect or not
+    const [profImgToServer, setprofImgToServer] = useState(null);
+    const [currentProfImg, setCurrentProfImg] = useState(null);
+    //use this boolean state to decide whether to run the useEffect or not
     //if false, don't run useEffect
-    //When the application pull the user's profile image from the sever, the flag will be false,
+    //When the application pull the user's profile image from the sever after login, the flag will be false,
     //as such, useEffect will not be run.
+    //However, useEffect is run when the user upload a new prof image.
     const [uploadImageFlag, setUploadImageFlag] = useState(false);
 
-    //reserver this function for uploading an image
+    //reserve this function for uploading an image
     useEffect(()=>
     {
         if (uploadImageFlag)
         {
-            //fetch send image to django
+            const uploadData = new FormData();
+            uploadData.append("newprofImg", profImgToServer);
+            uploadNewProfilePic(uploadData, getFileExtension(profImgToServer.name))
+            .then((res)=>
+            {
+                if (res.status === 200)
+                {
+                    //TODO make it work
+                    setCurrentProfImg(profImgToServer);
+                }
+            });
         }
         setUploadImageFlag(false);
-    }, [profImg]);
+    }, [profImgToServer]);
 
-    function manageProfileImage()
+    function prepareImageUpload()
     {
         const imgHolder = document.getElementById("img");
         setUploadImageFlag(true);
@@ -97,11 +109,15 @@ function ProfilePic(props)
     }
 
     return(
-            <form id="profile-pic" onClick={()=>manageProfileImage()}>
+            <form id="profile-pic" onClick={()=>prepareImageUpload()} style={{backgroundImage: `url(./${currentProfImg? currentProfImg: ""})`}}>
                  <div style={{display: "none"}}>
-                    <input type="file" id="img" name="img" accept="image/*" onChange={(e) => setProfImg(e.target.files[0])}/>
+                    <input type="file" id="img" name="img" accept="image/*" onChange={(e) => setprofImgToServer(e.target.files[0])}/>
                  </div>
             </form>
     );
 }
 
+function getFileExtension(filename)
+{
+    return filename.split('.').pop();
+}

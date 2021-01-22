@@ -39,14 +39,14 @@ export const logout = (token) => fetch("http://127.0.0.1:8000/api/auth/logout", 
         "X-CSRFToken": csrftoken,
         "Authorization": `Token ${token}`,
     }
-}).then(response => response.ok)
+}).then(response => response.ok);
 
 export const getVocab = (token) => fetch("http://127.0.0.1:8000/api/vocab", {
     method:"GET",
     headers:{
         "Authorization": `Token ${token}`,
     }
-}).then(response => errorCheck(response))
+}).then(response => errorCheck(response));
 
 export const addVocab = (token, newCard) => fetch("http://127.0.0.1:8000/api/vocab/", {
     method:"POST",
@@ -56,7 +56,7 @@ export const addVocab = (token, newCard) => fetch("http://127.0.0.1:8000/api/voc
         "Authorization": `Token ${token}`,
     },
     body: JSON.stringify(newCard)
-}).then(response => errorCheck(response))
+}).then(response => errorCheck(response));
 
 export const deleteVocab = (token, word) => fetch(`http://127.0.0.1:8000/api/vocab/${word}/`, {
     method:"DELETE",
@@ -65,18 +65,28 @@ export const deleteVocab = (token, word) => fetch(`http://127.0.0.1:8000/api/voc
         "X-CSRFToken": csrftoken,
         "Authorization": `Token ${token}`,
     }
-}).then(response => errorCheck(response))
+}).then(response => errorCheck(response));
 
 export const cambridgeDefinitionAPI = (word) => fetch(`http://127.0.0.1:8000/api/definition_cambridge/${word}`,{
     method: "GET",
     headers:{
         "Authorization": `Token ${getToken()}`
     }
-}).then(response => errorCheck(response))
+}).then(response => errorCheck(response));
 
 export const oxfordDefinitionAPI = (word) => fetch(`http://127.0.0.1:8000/api/definition_oxford/${word}`,{
     method: "GET",
     headers:{
         "Authorization": `Token ${getToken()}`
     }
-}).then(response => errorCheck(response))
+}).then(response => errorCheck(response));
+
+export const uploadNewProfilePic = (profPic, extension) => fetch(`http://127.0.0.1:8000/api/manage_user_profile_pic`,
+{
+    method: "POST",
+    headers:{
+        "X-CSRFToken": csrftoken,
+        "Authorization": `Token ${getToken()}`,
+    },
+    body: profPic
+})
