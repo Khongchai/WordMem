@@ -90,3 +90,12 @@ export const uploadNewProfilePic = (profPic, extension) => fetch(`http://127.0.0
     },
     body: profPic
 })
+
+export const getProfilePicture = () => fetch(`http://127.0.0.1:8000/api/manage_user_profile_pic`,
+{
+    method: "GET",
+    headers:
+    {
+        "Authorization": `Token ${getToken()}`
+    }
+});

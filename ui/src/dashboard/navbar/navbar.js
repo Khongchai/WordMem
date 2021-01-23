@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import '../dashboard.css';
 import './navbar.css';
 import Book from '../../svg/book';
-import {logout, uploadNewProfilePic} from '../../fetch/fetch';
+import {logout, uploadNewProfilePic, getProfilePicture} from '../../fetch/fetch';
 import {getToken, setLocalStorageAuthState, getCurrentUser} from '../../Authentication/AuthState';
 import {useHistory} from 'react-router-dom';
 import {useSelector} from 'react-redux';
@@ -10,7 +10,39 @@ import {useSelector} from 'react-redux';
 export default function Navbar()
 {
     const vocabList = useSelector(state => state.cardHistory.present);
+    const [currentProfImg, setCurrentProfImg] = useState(null);
     var history = useHistory();
+
+    useEffect(()=>
+    {
+        getProfilePicture()
+        .then((res)=>
+        {
+            if (res.status == 204)
+            {
+                return false;
+            }
+            else 
+            {
+                return res.blob();
+            }
+        })
+        .then((profImg)=>
+        {
+            if (profImg)
+            {
+                setCurrentProfImg(profImg);
+                removeImageIndicatorClassFromProfImage();
+            }
+        });
+    }, []);
+
+    
+    function removeImageIndicatorClassFromProfImage()
+    {
+        document.getElementById('profile-pic').classList.remove("upload-image-indicator");
+    }
+
     function logUserOutAndRedirect(e)
     {
         e.preventDefault();
@@ -21,8 +53,7 @@ export default function Navbar()
             {
                 history.push("/login");
             }
-        })
-        
+        }) 
     }
     function checkLogOutStatAndClearLocalStorage(ok)
     {
@@ -41,7 +72,8 @@ export default function Navbar()
         <div className="dashboardNavBar">
             <ul className="navbar-nav">
                 <li className="nav-item">
-                    <ProfilePic />
+                    <ProfilePic currentProfImg={currentProfImg} setCurrentProfImg={setCurrentProfImg} 
+                    removeImageIndicatorClassFromProfImage={removeImageIndicatorClassFromProfImage} />
                 </li>
 
                 <li className="nav-item">
@@ -73,43 +105,39 @@ function ProfilePic(props)
 {
 
     const [profImgToServer, setprofImgToServer] = useState(null);
-    const [currentProfImg, setCurrentProfImg] = useState(null);
-    //use this boolean state to decide whether to run the useEffect or not
-    //if false, don't run useEffect
-    //When the application pull the user's profile image from the sever after login, the flag will be false,
-    //as such, useEffect will not be run.
-    //However, useEffect is run when the user upload a new prof image.
-    const [uploadImageFlag, setUploadImageFlag] = useState(false);
 
     //reserve this function for uploading an image
     useEffect(()=>
     {
-        if (uploadImageFlag)
+        //User uploads a new profile image
+        if (profImgToServer)
         {
             const uploadData = new FormData();
-            uploadData.append("newprofImg", profImgToServer);
+            uploadData.append("newProfImg", profImgToServer);
             uploadNewProfilePic(uploadData, getFileExtension(profImgToServer.name))
             .then((res)=>
             {
                 if (res.status === 200)
                 {
-                    //TODO make it work
-                    setCurrentProfImg(profImgToServer);
+                    //Set new profile image
+                    props.setCurrentProfImg(profImgToServer); 
+                    setprofImgToServer(null);
+                    props.removeImageIndicatorClassFromProfImage();
                 }
             });
         }
-        setUploadImageFlag(false);
-    }, [profImgToServer]);
+        
+    }, [profImgToServer], );
 
     function prepareImageUpload()
     {
         const imgHolder = document.getElementById("img");
-        setUploadImageFlag(true);
         imgHolder.click();
     }
 
+
     return(
-            <form id="profile-pic" onClick={()=>prepareImageUpload()} style={{backgroundImage: `url(./${currentProfImg? currentProfImg: ""})`}}>
+            <form id="profile-pic" className="upload-image-indicator" onClick={()=>prepareImageUpload()} style={{backgroundImage: `url(${props.currentProfImg? URL.createObjectURL(props.currentProfImg): ""})`}}>
                  <div style={{display: "none"}}>
                     <input type="file" id="img" name="img" accept="image/*" onChange={(e) => setprofImgToServer(e.target.files[0])}/>
                  </div>

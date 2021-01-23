@@ -1,0 +1,23 @@
+#definitions-from-API
+{
+    display: flex;
+    flex-direction: row;
+    padding-left: var(--main-left-padding);
+    max-width: 200px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#definitions-from-API > img:hover
+{
+    border-bottom: solid 1px black;
+    
+}
+#definitions-from-API > img
+{
+    border-bottom-width: 0.1px;
+    border-bottom: solid 1px transparent;
+    transition: .3s;
+    cursor: pointer;
+    clip-path:inset(0 1% 0 0);
+}

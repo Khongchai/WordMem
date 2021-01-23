@@ -3,6 +3,7 @@ import {cambridgeDefinitionAPI, oxfordDefinitionAPI} from '../../fetch/fetch';
 import cambridgeLogo from '../../images/cambridge.png';
 import oxfordLogo from '../../images/oxford.png';
 import {useSelector} from 'react-redux';
+import "./definitionAPI.css";
 
 export default function DefinitionsFromAPI(props)
 {

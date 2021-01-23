@@ -4,13 +4,14 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Vocab
 from .serializers import VocabSerializer, AddNewVocab
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from rest_framework import generics
 from rest_framework import viewsets, permissions
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .utils import get_syn_id, get_list_of_definitions
 from rest_framework.decorators import api_view
+import base64
 
 
 class VocabAPI(viewsets.ModelViewSet):
@@ -70,13 +71,16 @@ class ManageUserProfilePic(generics.GenericAPIView):
 
     def post(self, request, *args, **kwargs):
         user = self.request.user
-        if not user.prof_img:
-            user.prof_img = request.data["newProfImg"]
-            user.save()
-            #user.prof_img = request.data["profImg"]
+        user.prof_img = request.data["newProfImg"]
+        user.save()
         return Response(status=200)
 
-    #create a get function to retrieve image
+    def get(self, request):
+        user = self.request.user
+        if user.prof_img:
+            return HttpResponse(user.prof_img, content_type="image/png")
+        else:
+            return Response(status=204)
 
 
 

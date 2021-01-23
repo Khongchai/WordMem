@@ -1,14 +1,20 @@
-#profile-pic:hover::after
+.upload-image-indicator:hover::after
 {
-    content: "Upload picture";
+    content: "Upload picture \a 200x200";
+    white-space: pre;
     width: 100%;
+    text-align: center;
     pointer-events: none;
     height: 100%;
     display: grid;
     place-items: center;
     animation: fadein .3s;
-
 }
+#profile-pic
+{
+    background-size: cover;
+}
+
 
 @keyframes fadein
 {
