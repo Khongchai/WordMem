@@ -11,6 +11,7 @@ from rest_framework import viewsets, permissions
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .utils import get_syn_id, get_list_of_definitions
 from rest_framework.decorators import api_view
+from django.core.exceptions import ObjectDoesNotExist
 import base64
 
 
@@ -25,11 +26,19 @@ class VocabAPI(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     def create(self, request, *args, **kwargs):
+        #TODO check if card already exists for this user, if not, proceed to create, else, return something
+        user = self.request.user
         data = request.data
         word = data["word"]
         meaning = data["meaning"]
         synonyms = get_syn_id(data["synonyms"])
-        user = self.request.user
+
+        try:
+            if Vocab.objects.get(word__iexact=word, owner=self.request.user):
+                return Response({"msg": "Word already exists"}, status=409)
+        except ObjectDoesNotExist:
+            #means that there is no duplicate, proceed
+            pass
 
         serializer = AddNewVocab(data={"word": word, "meaning": meaning, "synonyms": synonyms, "owner": user.id})
         serializer.is_valid(raise_exception=True)
