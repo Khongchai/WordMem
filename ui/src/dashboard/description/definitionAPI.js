@@ -58,7 +58,7 @@ export default function DefinitionsFromAPI(props) {
           {props.arrayOfDefinitions.map((definition) => (
             <li className="definition">{definition}</li>
           ))}
-          <a href={props.url} target="_blank">
+          <a href={props.url} target="_blank" rel="noopener noreferrer">
             Go to Dictionary
           </a>
         </ol>
@@ -72,12 +72,14 @@ export default function DefinitionsFromAPI(props) {
         className={className}
         onClick={() => fetchDefinition("cambridge")}
         style={{ width: "100%" }}
+        alt="Cambridge Logo"
       />
       <img
         src={oxfordLogo}
         className={className}
         onClick={() => fetchDefinition("oxford")}
         style={{ width: "100%" }}
+        alt="Oxford Logo"
       />
     </div>
   );
