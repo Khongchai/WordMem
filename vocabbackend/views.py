@@ -14,7 +14,6 @@ from rest_framework.decorators import api_view
 from django.core.exceptions import ObjectDoesNotExist
 import base64
 
-
 class VocabAPI(viewsets.ModelViewSet):
     serializer_class = VocabSerializer
     permission_classes = [IsAuthenticated,]
