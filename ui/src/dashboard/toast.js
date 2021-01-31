@@ -1,6 +1,8 @@
 import React from "react";
 import "./toast.css";
 
+var toastOrder = 1;
+
 export default function Toast() {
   return (
     <section id="toasts-parent">
@@ -21,9 +23,10 @@ export async function showToast(toastMessage, optionalColor) {
 
 function display(toast, toastMessage, optionalColor) {
   toast.classList.add("show");
-  toast.innerHTML = toastMessage;
+  toast.innerHTML = `${toastMessage} (${toastOrder})`;
   toast.style.backgroundColor = manageColor(optionalColor);
   manageTimeout(toast);
+  toastOrder++;
 }
 
 function manageColor(optionalColor) {
@@ -37,22 +40,25 @@ function manageTimeout(toast) {
     toast.style.background = "#F17300";
     if (toast.classList.contains("extra-toasts")) {
       toast.remove();
+    } else {
+      //reset the order number when all toasts have faded out.
+      toastOrder = 1;
     }
   }, 3000);
 }
 
 function addAnotherToastUnder(toast, toastMessage, optionalColor) {
-  const ANOTHER_TOAST = toast.cloneNode(true);
-  const TOAST_COMPUTED_STYLES = window.getComputedStyle(toast);
-  ANOTHER_TOAST.style.cssText = TOAST_COMPUTED_STYLES.cssText;
+  const anotherToast = toast.cloneNode(true);
+  const toastComputedStyles = window.getComputedStyle(toast);
+  anotherToast.style.cssText = toastComputedStyles.cssText;
 
-  ANOTHER_TOAST.id = "";
-  ANOTHER_TOAST.classList.remove("show");
-  ANOTHER_TOAST.classList.add("extra-toasts", "toasts");
+  anotherToast.id = "";
+  anotherToast.classList.remove("show");
+  anotherToast.classList.add("extra-toasts", "toasts");
 
-  const TOASTS = document.getElementsByClassName("toasts");
-  const LAST_TOAST = TOASTS[0];
-  LAST_TOAST.parentNode.insertBefore(ANOTHER_TOAST, LAST_TOAST);
+  const toasts = document.getElementsByClassName("toasts");
+  const lastToast = toasts[0];
+  lastToast.parentNode.insertBefore(anotherToast, lastToast);
 
-  display(ANOTHER_TOAST, toastMessage, optionalColor);
+  display(anotherToast, toastMessage, optionalColor);
 }
