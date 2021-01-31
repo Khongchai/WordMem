@@ -1,0 +1,1 @@
+Get python to serve react locally and it will work when it's up
