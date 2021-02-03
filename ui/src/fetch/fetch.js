@@ -3,7 +3,7 @@ import errorCheck, { errorCheckForLogin } from "./errorCheck";
 import { getToken } from "./../Authentication/AuthState";
 
 export const register = (username, password, email) =>
-  fetch("/api/auth/register", {
+  fetch("https://vocab-mem.herokuapp.com/api/auth/register", {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -17,7 +17,7 @@ export const register = (username, password, email) =>
   }).then((newUserDetails) => errorCheck(newUserDetails));
 
 export const login = (username, password) =>
-  fetch("/api/auth/login", {
+  fetch("https://vocab-mem.herokuapp.com/api/auth/login", {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -30,7 +30,7 @@ export const login = (username, password) =>
   }).then((response) => errorCheckForLogin(response));
 
 export const logout = (token) =>
-  fetch("/api/auth/logout", {
+  fetch("https://vocab-mem.herokuapp.com/api/auth/logout", {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -40,7 +40,7 @@ export const logout = (token) =>
   }).then((response) => response.ok);
 
 export const getVocab = (token) =>
-  fetch("/api/vocab", {
+  fetch("https://vocab-mem.herokuapp.com/api/vocab", {
     method: "GET",
     headers: {
       Authorization: `Token ${token}`,
@@ -48,7 +48,7 @@ export const getVocab = (token) =>
   }).then((response) => errorCheck(response));
 
 export const addVocab = (token, newCard) =>
-  fetch("/api/vocab/", {
+  fetch("https://vocab-mem.herokuapp.com/api/vocab/", {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -59,7 +59,7 @@ export const addVocab = (token, newCard) =>
   }).then((response) => errorCheck(response));
 
 export const deleteVocab = (token, word) =>
-  fetch(`/api/vocab/${word}/`, {
+  fetch(`https://vocab-mem.herokuapp.com/api/vocab/${word}/`, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json",
@@ -69,7 +69,7 @@ export const deleteVocab = (token, word) =>
   }).then((response) => errorCheck(response));
 
 export const cambridgeDefinitionAPI = (word) =>
-  fetch(`/api/definition_cambridge/${word}`, {
+  fetch(`https://vocab-mem.herokuapp.com/api/definition_cambridge/${word}`, {
     method: "GET",
     headers: {
       Authorization: `Token ${getToken()}`,
@@ -77,7 +77,7 @@ export const cambridgeDefinitionAPI = (word) =>
   }).then((response) => errorCheck(response));
 
 export const oxfordDefinitionAPI = (word) =>
-  fetch(`/api/definition_oxford/${word}`, {
+  fetch(`https://vocab-mem.herokuapp.com/api/definition_oxford/${word}`, {
     method: "GET",
     headers: {
       Authorization: `Token ${getToken()}`,
@@ -85,7 +85,7 @@ export const oxfordDefinitionAPI = (word) =>
   }).then((response) => errorCheck(response));
 
 export const uploadNewProfilePic = (profPic, extension) =>
-  fetch(`/api/manage_user_profile_pic`, {
+  fetch(`https://vocab-mem.herokuapp.com/api/manage_user_profile_pic`, {
     method: "POST",
     headers: {
       "X-CSRFToken": csrftoken,
@@ -95,7 +95,7 @@ export const uploadNewProfilePic = (profPic, extension) =>
   });
 
 export const getProfilePicture = () =>
-  fetch(`/api/manage_user_profile_pic`, {
+  fetch(`https://vocab-mem.herokuapp.com/api/manage_user_profile_pic`, {
     method: "GET",
     headers: {
       Authorization: `Token ${getToken()}`,
