@@ -23,3 +23,7 @@ Functionalities:
 - Authentication system
 
 - Add profile picture
+
+
+
+Visit: https://vocab-mem-front.herokuapp.com/
